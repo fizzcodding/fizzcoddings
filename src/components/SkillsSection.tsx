@@ -111,27 +111,29 @@ export const SkillsSection = () => {
             <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-mono text-sm text-foreground font-semibold">Codeforces</span>
-                <a
-                  href="https://codeforces.com/profile/max_verstappen_goat1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+                <span className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 text-xs font-mono rounded">
+                  Expert
+                </span>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">Problems Solved</span>
-                  <span className="font-mono text-sm text-primary">55</span>
+                  <span className="text-xs text-muted-foreground">Rank</span>
+                  <span className="font-mono text-sm text-cyan-400">Expert</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">Rating</span>
+                  <span className="text-xs text-muted-foreground">Max Rating</span>
                   <span className="font-mono text-sm text-terminal-amber">1844</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">Username</span>
-                  <span className="font-mono text-xs text-foreground">max_verstappen_goat1</span>
+                  <span className="text-xs text-muted-foreground">Profile</span>
+                  <a
+                    href="https://codeforces.com/profile/max_verstappen_goat1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                  >
+                    max_verstappen_goat1 <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -141,13 +143,21 @@ export const SkillsSection = () => {
               <div className="flex items-center justify-between mb-3">
                 <span className="font-mono text-sm text-foreground font-semibold">LeetCode</span>
                 <span className="px-2 py-0.5 bg-terminal-amber/10 text-terminal-amber text-xs font-mono rounded">
-                  Expert
+                  Knight
                 </span>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-muted-foreground">Rank</span>
-                  <span className="font-mono text-sm text-terminal-green">Expert</span>
+                  <span className="font-mono text-sm text-terminal-amber">Knight</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Contest Rating</span>
+                  <span className="font-mono text-sm text-terminal-green">1943</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Problems Solved</span>
+                  <span className="font-mono text-sm text-primary">1015</span>
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-xs text-muted-foreground">Profiles:</span>

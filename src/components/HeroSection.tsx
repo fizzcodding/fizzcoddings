@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Globe } from 'lucide-react';
+import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Linkedin } from 'lucide-react';
 import profileImage from '@/assets/profile.jpg';
 
 const languages = [
@@ -11,8 +11,8 @@ export const HeroSection = () => {
   const socials = [
     { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
     { icon: MessageSquare, href: 'https://wa.me/8801993227968', label: 'WHATSAPP' },
-    { icon: Twitter, href: 'https://twitter.com/fizz_codding', label: 'X (TWITTER)' },
-    { icon: Globe, href: 'https://fizzcodding.vercel.app', label: 'PORTFOLIO' },
+    { icon: Twitter, href: 'https://twitter.com/fizz_codding', label: 'X' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/faiyaz-bin-iqbal-b494162bb/', label: 'LINKEDIN' },
     { icon: Mail, href: 'mailto:frozeplaysminecraft@gmail.com', label: 'EMAIL' },
   ];
 

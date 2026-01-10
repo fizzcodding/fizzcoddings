@@ -148,8 +148,8 @@ export const SkillsSection = () => {
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">Rank</span>
-                  <span className="font-mono text-sm text-terminal-amber">Knight</span>
+                  <span className="text-xs text-muted-foreground">Global Ranking</span>
+                  <span className="font-mono text-sm text-terminal-amber">#21100</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-muted-foreground">Contest Rating</span>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Briefcase, MapPin, ExternalLink } from 'lucide-react';
+import { Briefcase, MapPin } from 'lucide-react';
 
 const experiences = [
   {
@@ -32,13 +32,13 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 }
+    transition: { staggerChildren: 0.15 }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 }
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1 }
 };
 
 export const ExperienceSection = () => {
@@ -62,7 +62,7 @@ export const ExperienceSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="space-y-4"
+          className="grid md:grid-cols-2 gap-6"
         >
           {experiences.map((exp, index) => (
             <motion.div
@@ -70,32 +70,32 @@ export const ExperienceSection = () => {
               variants={itemVariants}
               className="glass-card rounded-xl p-6 group hover:border-primary/30 transition-all duration-300"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
-                    <Briefcase className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
+                  <Briefcase className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
                     <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                       {exp.company}
                     </h3>
-                    <p className="text-muted-foreground text-sm">{exp.role}</p>
-                    <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                    <span className="text-xs text-muted-foreground font-mono">{exp.period}</span>
+                  </div>
+                  <p className="text-muted-foreground text-sm mb-2">{exp.role}</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-secondary text-primary text-xs font-mono rounded">
+                      {exp.type}
+                    </span>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <MapPin className="w-3 h-3" />
                       <span>{exp.location}</span>
                     </div>
                   </div>
-                </div>
-                <div className="md:text-right">
-                  <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-mono rounded-md mb-1">
-                    {exp.type}
-                  </span>
-                  <p className="text-sm text-muted-foreground">{exp.period}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {exp.description}
+                  </p>
                 </div>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground leading-relaxed pl-16">
-                {exp.description}
-              </p>
             </motion.div>
           ))}
         </motion.div>

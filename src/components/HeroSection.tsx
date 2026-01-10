@@ -1,12 +1,27 @@
 import { motion } from 'framer-motion';
-import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2 } from 'lucide-react';
+import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Globe } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import profileImage from '@/assets/profile.jpg';
 
+const languages = [
+  'TypeScript', 'JavaScript', 'Python', 'C++', 'C#', 'Dart', 'Java', 'HTML5', 'CSS3'
+];
+
 export const HeroSection = () => {
+  const [currentLangIndex, setCurrentLangIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLangIndex((prev) => (prev + 1) % languages.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const socials = [
-    { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GITHUB' },
-    { icon: MessageSquare, href: 'https://wa.me/+8801234567890', label: 'WHATSAPP' },
-    { icon: Twitter, href: 'https://twitter.com/fizz_world', label: 'X (TWITTER)' },
+    { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
+    { icon: MessageSquare, href: 'https://wa.me/8801993227968', label: 'WHATSAPP' },
+    { icon: Twitter, href: 'https://twitter.com/fizz_codding', label: 'X (TWITTER)' },
+    { icon: Globe, href: 'https://fizzcodding.vercel.app', label: 'PORTFOLIO' },
     { icon: Mail, href: 'mailto:frozeplaysminecraft@gmail.com', label: 'EMAIL' },
   ];
 
@@ -165,7 +180,7 @@ export const HeroSection = () => {
               </div>
 
               {/* Skills */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-4">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-muted-foreground">SKILLSET_PROTOCOL</span>
                   <Sparkles className="w-4 h-4 text-primary" />
@@ -177,6 +192,29 @@ export const HeroSection = () => {
                     <span className="font-mono text-sm text-foreground">{skill.name}</span>
                   </div>
                 ))}
+              </div>
+
+              {/* Languages Carousel */}
+              <div className="mb-4 py-3 border-t border-b border-border/50">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-xs text-muted-foreground">LANGUAGES:</span>
+                </div>
+                <div className="relative h-6 overflow-hidden">
+                  <motion.div
+                    key={currentLangIndex}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-terminal-green" />
+                    <span className="font-mono text-sm text-primary">{languages[currentLangIndex]}</span>
+                    <span className="font-mono text-xs text-muted-foreground ml-2">
+                      [{currentLangIndex + 1}/{languages.length}]
+                    </span>
+                  </motion.div>
+                </div>
               </div>
 
               {/* Status */}

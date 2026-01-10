@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FolderGit2, ExternalLink, Github, Bot, Cpu, Smartphone, Code2 } from 'lucide-react';
+import { FolderGit2, Github, Bot, Cpu, Smartphone, Code2, Brain } from 'lucide-react';
 
 const projects = [
   {
@@ -17,6 +17,13 @@ const projects = [
     icon: Code2,
     year: '2024',
     github: 'https://github.com/fizzcodding/big-o-tracker',
+  },
+  {
+    title: 'Hollow AI',
+    description: 'An AI-powered assistant designed to provide intelligent responses and assist with various tasks. Built with cutting-edge machine learning techniques for natural conversation flow.',
+    tags: ['AI', 'Machine Learning', 'Python', 'NLP', 'React'],
+    icon: Brain,
+    year: '2024',
   },
   {
     title: 'E-commerce Platforms',
@@ -42,8 +49,15 @@ const itemVariants = {
 
 export const ProjectsSection = () => {
   return (
-    <section className="py-20 px-4" id="projects">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20 px-4 relative overflow-hidden" id="projects">
+      {/* Background text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <span className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-bold text-foreground/[0.03] whitespace-nowrap select-none">
+          BUILDING IS LIFE
+        </span>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +75,7 @@ export const ProjectsSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid gap-6"
+          className="grid md:grid-cols-2 gap-6"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -113,6 +127,19 @@ export const ProjectsSection = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* More projects coming soon */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 text-center"
+        >
+          <span className="font-mono text-sm text-muted-foreground">
+            {"// "}<span className="text-primary">More projects coming soon...</span>
+          </span>
         </motion.div>
       </div>
     </section>

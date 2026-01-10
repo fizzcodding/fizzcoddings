@@ -1,115 +1,202 @@
 import { motion } from 'framer-motion';
-import { Mail, Calendar, Github, Linkedin, Code2 } from 'lucide-react';
+import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2 } from 'lucide-react';
 import profileImage from '@/assets/profile.jpg';
 
 export const HeroSection = () => {
   const socials = [
-    { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/faiyaz', label: 'LinkedIn' },
-    { icon: Code2, href: 'https://leetcode.com/u/ice__fizz', label: 'LeetCode' },
+    { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GITHUB' },
+    { icon: MessageSquare, href: 'https://wa.me/+8801234567890', label: 'WHATSAPP' },
+    { icon: Twitter, href: 'https://twitter.com/fizz_world', label: 'X (TWITTER)' },
+    { icon: Mail, href: 'mailto:frozeplaysminecraft@gmail.com', label: 'EMAIL' },
+  ];
+
+  const skills = [
+    { name: 'ADVANCED_WEB_DEV', color: 'bg-primary' },
+    { name: 'VIBE_CODING', color: 'bg-terminal-green' },
+    { name: 'FULL_STACK_EXPERTISE', color: 'bg-accent' },
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-20">
-      <div className="max-w-4xl w-full">
-        <motion.div 
-          className="glass-card rounded-2xl p-8 md:p-12"
-          initial={{ opacity: 0, y: 30 }}
+    <section className="min-h-screen flex items-center px-4 py-20 relative overflow-hidden">
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-primary/30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Identity badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ delay: 0.2 }}
+          className="mb-8"
         >
-          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            {/* Profile Image */}
-            <motion.div 
-              className="relative shrink-0"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden glow-border animate-glow">
-                <img 
-                  src={profileImage} 
-                  alt="Faiyaz Bin Iqbal"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-terminal-green rounded-full border-4 border-background" />
-            </motion.div>
-
-            {/* Info */}
-            <div className="flex-1 text-center md:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <span className="text-xs font-mono text-primary mb-2 inline-block">◯</span>
-                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                  Faiyaz Bin Iqbal
-                </h1>
-                <p className="text-lg text-primary font-medium mb-4">
-                  Full-Stack Developer & IoT Innovator
-                </p>
-              </motion.div>
-
-              <motion.p 
-                className="text-muted-foreground leading-relaxed mb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                Creative developer with 5+ years building responsive web apps, smart robotics, 
-                and automation systems. Skilled in React, Flutter, Arduino, and ESP32. 
-                Merging software and hardware for real-world solutions.
-              </motion.p>
-
-              {/* Action Buttons */}
-              <motion.div 
-                className="flex flex-wrap gap-3 justify-center md:justify-start mb-6"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-              >
-                <a 
-                  href="mailto:frozeplaysminecraft@gmail.com"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-all hover:scale-105"
-                >
-                  <Mail className="w-4 h-4" />
-                  Hire Me
-                </a>
-                <a 
-                  href="mailto:frozeplaysminecraft@gmail.com"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-foreground rounded-lg font-medium hover:border-primary hover:text-primary transition-all"
-                >
-                  <Calendar className="w-4 h-4" />
-                  Book a Call
-                </a>
-              </motion.div>
-
-              {/* Socials */}
-              <motion.div 
-                className="flex gap-2 justify-center md:justify-start"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <span className="text-sm text-muted-foreground mr-2">Find me on</span>
-                {socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg border border-border hover:border-primary hover:text-primary transition-all hover:scale-110"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-4 h-4" />
-                  </a>
-                ))}
-              </motion.div>
-            </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
+            <span className="font-mono text-sm text-muted-foreground">IDENTITY:</span>
+            <span className="font-mono text-sm text-foreground">FAIYAZ BIN IQBAL</span>
+            <span className="font-mono text-xs text-primary">(FIZZ-AI)</span>
           </div>
         </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left column - Main content */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-2 font-mono italic">
+                Web
+              </h1>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 font-mono">
+                Developer
+              </h1>
+              <p className="text-lg text-muted-foreground mb-8">
+                Full Stack + <span className="text-primary">Vibe Coder</span>
+              </p>
+            </motion.div>
+
+            {/* Bio card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="glass-card rounded-xl p-6 mb-8 border border-border/50"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">Building Amazing Sites</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    I'm a passionate and curious developer who brings a unique blend of creativity and technical skill to every project I touch. From building slick front-end interfaces to experimenting with emerging tech, I'm always chasing new ideas and better ways to solve problems. Whether I'm coding solo or collaborating with a team, I believe great work comes from{' '}
+                    <span className="text-primary">keeping things simple, clean, and a little unexpected.</span>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Social buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap gap-3"
+            >
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card/50 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
+                >
+                  <social.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition-colors">
+                    {social.label}
+                  </span>
+                </a>
+              ))}
+            </motion.div>
+
+            {/* Made by footer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="mt-8 pt-4 border-t border-dashed border-primary/30"
+            >
+              <div className="font-mono text-xs">
+                <span className="text-primary/50">10100101 01010010 01100000 01010000 111</span>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  <span className="text-primary">Made By Faiyaz</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right column - Profile card */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="relative"
+          >
+            <div className="glass-card rounded-xl p-6 border border-border/50 max-w-sm ml-auto">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-primary/30">
+                    <img 
+                      src={profileImage} 
+                      alt="Faiyaz Bin Iqbal"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs text-primary font-mono">WEB_DEVELOPER</p>
+                    <p className="text-sm font-semibold text-foreground">Faiyaz Bin Iqbal</p>
+                  </div>
+                </div>
+                <Code2 className="w-5 h-5 text-primary" />
+              </div>
+
+              {/* Skills */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-muted-foreground">SKILLSET_PROTOCOL</span>
+                  <Sparkles className="w-4 h-4 text-primary" />
+                </div>
+                {skills.map((skill) => (
+                  <div key={skill.name} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-border" />
+                    <span className={`w-2 h-2 rounded-full ${skill.color}`} />
+                    <span className="font-mono text-sm text-foreground">{skill.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Status */}
+              <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">STATUS:</span>
+                  <span className="font-mono text-xs text-terminal-green">AVAILABLE</span>
+                </div>
+                <a
+                  href="mailto:frozeplaysminecraft@gmail.com"
+                  className="font-mono text-xs text-foreground hover:text-primary transition-colors"
+                >
+                  Open to Projects
+                </a>
+              </div>
+            </div>
+
+            {/* Decorative elements */}
+            <div className="absolute -z-10 top-1/2 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

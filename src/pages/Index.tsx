@@ -1,12 +1,55 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { BootSequence } from '@/components/BootSequence';
+import { Navigation } from '@/components/Navigation';
+import { HeroSection } from '@/components/HeroSection';
+import { ExperienceSection } from '@/components/ExperienceSection';
+import { ProjectsSection } from '@/components/ProjectsSection';
+import { SkillsSection } from '@/components/SkillsSection';
+import { ContactSection } from '@/components/ContactSection';
 
 const Index = () => {
+  const [showBoot, setShowBoot] = useState(true);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Handle keyboard press to skip boot
+    const handleKeyPress = () => {
+      if (showBoot) {
+        setShowBoot(false);
+        setIsReady(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showBoot]);
+
+  const handleBootComplete = () => {
+    setShowBoot(false);
+    setTimeout(() => setIsReady(true), 100);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <AnimatePresence mode="wait">
+        {showBoot && (
+          <BootSequence onComplete={handleBootComplete} />
+        )}
+      </AnimatePresence>
+
+      {!showBoot && (
+        <>
+          <Navigation />
+          <main>
+            <HeroSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <SkillsSection />
+            <ContactSection />
+          </main>
+        </>
+      )}
     </div>
   );
 };

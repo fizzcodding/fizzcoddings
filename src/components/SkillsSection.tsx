@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Wrench, Code2, Cpu, Smartphone, Database, Palette, Bot } from 'lucide-react';
+import { Wrench, Code2, Cpu, Smartphone, Database, Palette, Bot, ExternalLink } from 'lucide-react';
 
 const skillCategories = [
   {
@@ -93,7 +93,7 @@ export const SkillsSection = () => {
           ))}
         </motion.div>
 
-        {/* LeetCode Stats */}
+        {/* Competitive Coding Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -101,23 +101,77 @@ export const SkillsSection = () => {
           transition={{ delay: 0.3 }}
           className="mt-8 glass-card rounded-xl p-6"
         >
-          <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+          <h3 className="font-semibold text-foreground mb-6 flex items-center gap-2">
             <Code2 className="w-5 h-5 text-primary" />
-            LeetCode Stats
+            Competitive Coding Stats
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { label: 'Global Rank', value: '~18.5K', subtext: 'among 5M+' },
-              { label: 'Problems Solved', value: '1061', subtext: '/3647' },
-              { label: 'Contest Rating', value: '1981', subtext: 'points' },
-              { label: 'DSA Mastery', value: '80%', subtext: 'completed' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-lg bg-secondary/50">
-                <p className="text-2xl font-bold text-primary">{stat.value}</p>
-                <p className="text-xs text-muted-foreground">{stat.subtext}</p>
-                <p className="text-sm text-foreground mt-1">{stat.label}</p>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Codeforces */}
+            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-sm text-foreground font-semibold">Codeforces</span>
+                <a
+                  href="https://codeforces.com/profile/max_verstappen_goat1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
-            ))}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Problems Solved</span>
+                  <span className="font-mono text-sm text-primary">55</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Rating</span>
+                  <span className="font-mono text-sm text-terminal-amber">1844</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Username</span>
+                  <span className="font-mono text-xs text-foreground">max_verstappen_goat1</span>
+                </div>
+              </div>
+            </div>
+
+            {/* LeetCode */}
+            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-sm text-foreground font-semibold">LeetCode</span>
+                <span className="px-2 py-0.5 bg-terminal-amber/10 text-terminal-amber text-xs font-mono rounded">
+                  Expert
+                </span>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Rank</span>
+                  <span className="font-mono text-sm text-terminal-green">Expert</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs text-muted-foreground">Profiles:</span>
+                  <div className="flex gap-2">
+                    <a
+                      href="https://leetcode.com/ice__fizz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                    >
+                      ice__fizz <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a
+                      href="https://leetcode.com/_rinfizz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                    >
+                      _rinfizz <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

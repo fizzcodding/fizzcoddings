@@ -7,12 +7,17 @@ import { ExperienceSection } from '@/components/ExperienceSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
 import { SkillsSection } from '@/components/SkillsSection';
 import { ContactSection } from '@/components/ContactSection';
+import { CustomCursor } from '@/components/CustomCursor';
+import { NameBadge } from '@/components/NameBadge';
 
 const Index = () => {
   const [showBoot, setShowBoot] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    // Apply dark mode by default
+    document.documentElement.classList.add('dark');
+
     // Handle keyboard press to skip boot
     const handleKeyPress = () => {
       if (showBoot) {
@@ -32,6 +37,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <CustomCursor />
+      
       <AnimatePresence mode="wait">
         {showBoot && (
           <BootSequence onComplete={handleBootComplete} />
@@ -40,6 +47,7 @@ const Index = () => {
 
       {!showBoot && (
         <>
+          <NameBadge />
           <Navigation />
           <main>
             <HeroSection />

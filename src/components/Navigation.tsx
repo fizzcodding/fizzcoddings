@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Terminal } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
   { label: 'Home', href: '#' },
@@ -31,31 +32,30 @@ export const Navigation = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 font-mono text-primary">
-            <Terminal className="w-5 h-5" />
-            <span className="font-bold">FAIYAZ<span className="text-foreground">_OS</span></span>
-          </a>
-
+        <div className="flex items-center justify-end h-16 gap-4">
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-secondary/50"
+                className="px-4 py-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-secondary/50"
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href="mailto:frozeplaysminecraft@gmail.com"
-              className="ml-4 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-all"
-            >
-              Hire Me
-            </a>
           </div>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
+          {/* Hire Me Button */}
+          <a
+            href="mailto:frozeplaysminecraft@gmail.com"
+            className="hidden md:block px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-all"
+          >
+            Hire Me
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -80,7 +80,7 @@ export const Navigation = () => {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 text-muted-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-colors"
+                  className="px-4 py-3 font-mono text-muted-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-colors"
                 >
                   {item.label}
                 </a>

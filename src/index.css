@@ -6,7 +6,54 @@
 
 @layer base {
   :root {
-    /* Deep Sea Blue Theme */
+    /* Light Mode - White + Deep Blue */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 210 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 40% 93%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 210 40% 93%;
+    --muted-foreground: 215 16% 47%;
+    
+    --accent: 187 100% 42%;
+    --accent-foreground: 222 47% 5%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 85%;
+    --input: 214 32% 91%;
+    --ring: 210 100% 45%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom tokens */
+    --glow: 210 100% 45%;
+    --terminal-green: 142 76% 36%;
+    --terminal-amber: 38 92% 50%;
+    
+    /* Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(210 40% 95%) 50%, hsl(210 45% 93%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(210 100% 45% / 0.1) 0%, hsl(187 100% 42% / 0.05) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(210 100% 45% / 0.2);
+    --shadow-card: 0 4px 24px hsl(222 47% 11% / 0.08);
+  }
+
+  .dark {
+    /* Dark Mode - Deep Sea Blue */
     --background: 222 47% 5%;
     --foreground: 210 40% 98%;
     
@@ -35,32 +82,29 @@
     --input: 222 47% 15%;
     --ring: 187 100% 50%;
     
-    --radius: 0.75rem;
-    
-    /* Custom tokens */
+    /* Custom tokens - Dark */
     --glow: 187 100% 50%;
     --terminal-green: 142 76% 56%;
     --terminal-amber: 38 92% 50%;
     
-    /* Gradients */
+    /* Gradients - Dark */
     --gradient-ocean: linear-gradient(135deg, hsl(222 47% 5%) 0%, hsl(222 47% 12%) 50%, hsl(200 50% 15%) 100%);
     --gradient-glow: linear-gradient(135deg, hsl(187 100% 50% / 0.2) 0%, hsl(187 100% 42% / 0.1) 100%);
     --gradient-card: linear-gradient(145deg, hsl(222 47% 10%) 0%, hsl(222 47% 7%) 100%);
     
-    /* Shadows */
+    /* Shadows - Dark */
     --shadow-glow: 0 0 20px hsl(187 100% 50% / 0.3);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.4);
-  }
-
-  .dark {
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -144,5 +188,15 @@
   @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
+  }
+
+  /* Terminal cursor blink */
+  .cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 }

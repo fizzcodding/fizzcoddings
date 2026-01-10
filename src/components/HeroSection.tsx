@@ -12,8 +12,9 @@ export const HeroSection = () => {
 
   const skills = [
     { name: 'ADVANCED_WEB_DEV', color: 'bg-primary' },
-    { name: 'VIBE_CODING', color: 'bg-terminal-green' },
-    { name: 'FULL_STACK_EXPERTISE', color: 'bg-accent' },
+    { name: 'DSA_EXPERTISE', color: 'bg-terminal-green' },
+    { name: 'FULLSTACK_EXPERT', color: 'bg-accent' },
+    { name: 'COMPETITIVE_PROGRAMMER', color: 'bg-terminal-amber' },
   ];
 
   return (
@@ -53,7 +54,7 @@ export const HeroSection = () => {
             <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
             <span className="font-mono text-sm text-muted-foreground">IDENTITY:</span>
             <span className="font-mono text-sm text-foreground">FAIYAZ BIN IQBAL</span>
-            <span className="font-mono text-xs text-primary">(FIZZ-AI)</span>
+            <span className="font-mono text-xs text-primary">(FIZZ)</span>
           </div>
         </motion.div>
 
@@ -72,7 +73,7 @@ export const HeroSection = () => {
                 Developer
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Full Stack + <span className="text-primary">Vibe Coder</span>
+                Fullstack + <span className="text-primary">Vibe Coder</span>, Robotics Expert
               </p>
             </motion.div>
 
@@ -88,10 +89,10 @@ export const HeroSection = () => {
                   <Sparkles className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2">Building Amazing Sites</h3>
+                  <h3 className="font-semibold text-foreground mb-2">Mission Statement</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    I'm a passionate and curious developer who brings a unique blend of creativity and technical skill to every project I touch. From building slick front-end interfaces to experimenting with emerging tech, I'm always chasing new ideas and better ways to solve problems. Whether I'm coding solo or collaborating with a team, I believe great work comes from{' '}
-                    <span className="text-primary">keeping things simple, clean, and a little unexpected.</span>
+                    My goal is to contribute something useful to the world—something that can genuinely change lives. I'm driven by the belief that technology, when built with purpose, can solve real problems and make a{' '}
+                    <span className="text-primary">meaningful difference in people's everyday lives.</span>
                   </p>
                 </div>
               </div>

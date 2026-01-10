@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Wrench, Code2, Cpu, Smartphone, Database, Palette } from 'lucide-react';
+import { Wrench, Code2, Cpu, Smartphone, Database, Palette, Bot } from 'lucide-react';
 
 const skillCategories = [
   {
@@ -18,9 +18,14 @@ const skillCategories = [
     skills: ['Flutter', 'Node.js', 'Firebase', 'REST APIs', 'Express.js'],
   },
   {
-    title: 'IoT & Embedded',
+    title: 'IoT & Robotics',
     icon: Cpu,
-    skills: ['Arduino', 'ESP32', 'Sensors', 'Motor Drivers', 'Bluetooth HC-05/06'],
+    skills: ['ESP32', 'Arduino', 'ROS2', 'IoT', 'Sensors', 'Motor Drivers'],
+  },
+  {
+    title: 'AI & ML',
+    icon: Bot,
+    skills: ['Machine Learning', 'TensorFlow', 'Computer Vision', 'NLP'],
   },
   {
     title: 'Tools & Platforms',

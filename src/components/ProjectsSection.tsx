@@ -1,21 +1,22 @@
 import { motion } from 'framer-motion';
-import { FolderGit2, ExternalLink, Github, Bot, Cpu, Smartphone } from 'lucide-react';
+import { FolderGit2, ExternalLink, Github, Bot, Cpu, Smartphone, Code2 } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Hollow AI',
-    description: 'An all-in-one app-controlled robot for security, home automation, and pill dispensing. Features voice commands, intruder detection with mini-guards, and AI assistant powered by ChatGPT, Gemini, Claude, and Grok.',
-    tags: ['Flutter', 'Arduino', 'ESP32', 'AI/ML', 'IoT'],
+    title: 'LifeSphere',
+    description: 'An all-in-one smart system for health, safety, home automation, and emotional support. It helps elderly and disabled users with AI-driven health monitoring, automated medicine dispensing, security sensors & robot alerts, fire/gas detection, smart home control, and a companion AI for mental support.',
+    tags: ['ESP32', 'ROS2', 'Machine Learning', 'IoT', 'Flutter', 'Arduino'],
     icon: Bot,
     status: 'In Progress',
     year: '2025',
   },
   {
-    title: 'Smart Home Automation',
-    description: 'Control lights, fans, and devices using voice commands or through an app even remotely. Features Lock Mode with security alerts and real-time monitoring.',
-    tags: ['React', 'Node.js', 'ESP32', 'Firebase'],
-    icon: Cpu,
+    title: 'Big-O-Tracker',
+    description: 'A VSCode extension that helps developers instantly analyze the time complexity of their code. No guesswork, no stress—just write code and see how efficient it is. Perfect for competitive programmers, students, and anyone obsessed with clean, optimized code.',
+    tags: ['VSCode Extension', 'TypeScript', 'Algorithm Analysis'],
+    icon: Code2,
     year: '2024',
+    github: 'https://github.com/fizzcodding/big-o-tracker',
   },
   {
     title: 'E-commerce Platforms',
@@ -74,9 +75,21 @@ export const ProjectsSection = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
                     <div className="flex items-center gap-2">
                       {project.status && (
                         <span className="px-2 py-1 bg-terminal-green/10 text-terminal-green text-xs font-mono rounded">

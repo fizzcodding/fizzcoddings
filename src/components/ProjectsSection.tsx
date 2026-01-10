@@ -19,13 +19,6 @@ const projects = [
     github: 'https://github.com/fizzcodding/big-o-tracker',
   },
   {
-    title: 'Hollow AI',
-    description: 'An intelligent AI assistant designed for seamless conversation and productivity. Features natural language processing, context awareness, and intuitive responses to help users accomplish tasks efficiently.',
-    tags: ['AI', 'NLP', 'Python', 'React', 'Machine Learning'],
-    icon: Cpu,
-    year: '2024',
-  },
-  {
     title: 'E-commerce Platforms',
     description: 'Built multiple Shopify storefronts with custom themes, optimized checkout flows, and responsive designs for clients in USA and Canada.',
     tags: ['Shopify', 'Liquid', 'JavaScript', 'CSS'],

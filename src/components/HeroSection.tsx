@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Globe } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import profileImage from '@/assets/profile.jpg';
 
 const languages = [
@@ -8,14 +7,6 @@ const languages = [
 ];
 
 export const HeroSection = () => {
-  const [currentLangIndex, setCurrentLangIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentLangIndex((prev) => (prev + 1) % languages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
 
   const socials = [
     { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
@@ -195,24 +186,28 @@ export const HeroSection = () => {
               </div>
 
               {/* Languages Carousel */}
-              <div className="mb-4 py-3 border-t border-b border-border/50">
+              <div className="mb-4 py-3 border-t border-b border-border/50 overflow-hidden">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="font-mono text-xs text-muted-foreground">LANGUAGES:</span>
                 </div>
-                <div className="relative h-6 overflow-hidden">
+                <div className="relative overflow-hidden">
                   <motion.div
-                    key={currentLangIndex}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex items-center gap-2"
+                    className="flex gap-2"
+                    animate={{ x: [0, -50 * languages.length] }}
+                    transition={{
+                      x: {
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear",
+                      },
+                    }}
                   >
-                    <span className="w-2 h-2 rounded-full bg-terminal-green" />
-                    <span className="font-mono text-sm text-primary">{languages[currentLangIndex]}</span>
-                    <span className="font-mono text-xs text-muted-foreground ml-2">
-                      [{currentLangIndex + 1}/{languages.length}]
-                    </span>
+                    {/* Duplicate languages for seamless loop */}
+                    {[...languages, ...languages].map((lang, i) => (
+                      <span key={`${lang}-${i}`} className="skill-tag text-xs whitespace-nowrap shrink-0">
+                        {lang}
+                      </span>
+                    ))}
                   </motion.div>
                 </div>
               </div>

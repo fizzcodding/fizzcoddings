@@ -4,9 +4,9 @@ import profileImage from '@/assets/profile.jpg';
 
 export const HeroSection = () => {
   const socials = [
-    { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GITHUB' },
-    { icon: MessageSquare, href: 'https://wa.me/+8801234567890', label: 'WHATSAPP' },
-    { icon: Twitter, href: 'https://twitter.com/fizz_world', label: 'X (TWITTER)' },
+    { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
+    { icon: MessageSquare, href: 'https://wa.me/+8801993227968', label: 'WHATSAPP' },
+    { icon: Twitter, href: 'https://twitter.com/fizz_codding', label: 'X (TWITTER)' },
     { icon: Mail, href: 'mailto:frozeplaysminecraft@gmail.com', label: 'EMAIL' },
   ];
 
@@ -138,62 +138,100 @@ export const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right column - Profile card */}
+          {/* Right column - 3D Laptop with Profile card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="relative"
+            className="relative perspective-1000"
           >
-            <div className="glass-card rounded-xl p-6 border border-border/50 max-w-sm ml-auto">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-primary/30">
-                    <img 
-                      src={profileImage} 
-                      alt="Faiyaz Bin Iqbal"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-xs text-primary font-mono">WEB_DEVELOPER</p>
-                    <p className="text-sm font-semibold text-foreground">Faiyaz Bin Iqbal</p>
-                  </div>
-                </div>
-                <Code2 className="w-5 h-5 text-primary" />
-              </div>
+            {/* Laptop mockup container */}
+            <div className="relative max-w-md ml-auto">
+              {/* Laptop screen */}
+              <motion.div 
+                className="relative bg-[#1a1a2e] rounded-t-xl p-2 border-4 border-[#2a2a3a] shadow-2xl"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transform: 'rotateX(10deg) rotateY(-5deg)',
+                }}
+                whileHover={{
+                  transform: 'rotateX(5deg) rotateY(-2deg)',
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Screen bezel */}
+                <div className="bg-[#0a0a12] rounded-lg p-4 relative overflow-hidden">
+                  {/* Screen reflection overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                  
+                  {/* Profile card content */}
+                  <div className="relative">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-primary/30">
+                          <img 
+                            src={profileImage} 
+                            alt="Faiyaz Bin Iqbal"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-xs text-primary font-mono">WEB_DEVELOPER</p>
+                          <p className="text-sm font-semibold text-foreground">Faiyaz Bin Iqbal</p>
+                        </div>
+                      </div>
+                      <Code2 className="w-5 h-5 text-primary" />
+                    </div>
 
-              {/* Skills */}
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-muted-foreground">SKILLSET_PROTOCOL</span>
-                  <Sparkles className="w-4 h-4 text-primary" />
-                </div>
-                {skills.map((skill) => (
-                  <div key={skill.name} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-border" />
-                    <span className={`w-2 h-2 rounded-full ${skill.color}`} />
-                    <span className="font-mono text-sm text-foreground">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
+                    {/* Skills */}
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs text-muted-foreground">SKILLSET_PROTOCOL</span>
+                        <Sparkles className="w-4 h-4 text-primary" />
+                      </div>
+                      {skills.map((skill) => (
+                        <div key={skill.name} className="flex items-center gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-border" />
+                          <span className={`w-2 h-2 rounded-full ${skill.color}`} />
+                          <span className="font-mono text-xs text-foreground">{skill.name}</span>
+                        </div>
+                      ))}
+                    </div>
 
-              {/* Status */}
-              <div className="flex items-center justify-between pt-4 border-t border-border">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs text-muted-foreground">STATUS:</span>
-                  <span className="font-mono text-xs text-terminal-green">AVAILABLE</span>
+                    {/* Status */}
+                    <div className="flex items-center justify-between pt-3 border-t border-border">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] text-muted-foreground">STATUS:</span>
+                        <span className="font-mono text-[10px] text-terminal-green">AVAILABLE</span>
+                      </div>
+                      <a
+                        href="mailto:frozeplaysminecraft@gmail.com"
+                        className="font-mono text-[10px] text-foreground hover:text-primary transition-colors"
+                      >
+                        Open to Projects
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <a
-                  href="mailto:frozeplaysminecraft@gmail.com"
-                  className="font-mono text-xs text-foreground hover:text-primary transition-colors"
-                >
-                  Open to Projects
-                </a>
-              </div>
+                
+                {/* Webcam dot */}
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#2a2a3a] flex items-center justify-center">
+                  <div className="w-1 h-1 rounded-full bg-[#0a0a12]" />
+                </div>
+              </motion.div>
+              
+              {/* Laptop base/keyboard */}
+              <div 
+                className="h-4 bg-gradient-to-b from-[#3a3a4a] to-[#2a2a3a] rounded-b-lg mx-2"
+                style={{
+                  transform: 'rotateX(60deg) translateY(-8px)',
+                  transformOrigin: 'top',
+                }}
+              />
+              <div className="h-2 bg-[#2a2a3a] rounded-b-xl mx-4 shadow-lg" />
             </div>
-
+            
             {/* Decorative elements */}
             <div className="absolute -z-10 top-1/2 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
           </motion.div>

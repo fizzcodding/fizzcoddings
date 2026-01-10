@@ -93,31 +93,86 @@ export const SkillsSection = () => {
           ))}
         </motion.div>
 
-        {/* LeetCode Stats */}
+        {/* Competitive Programming Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-8 glass-card rounded-xl p-6"
+          className="mt-8 space-y-6"
         >
-          <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-primary" />
-            LeetCode Stats
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { label: 'Global Rank', value: '~18.5K', subtext: 'among 5M+' },
-              { label: 'Problems Solved', value: '1061', subtext: '/3647' },
-              { label: 'Contest Rating', value: '1981', subtext: 'points' },
-              { label: 'DSA Mastery', value: '80%', subtext: 'completed' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-lg bg-secondary/50">
-                <p className="text-2xl font-bold text-primary">{stat.value}</p>
-                <p className="text-xs text-muted-foreground">{stat.subtext}</p>
-                <p className="text-sm text-foreground mt-1">{stat.label}</p>
+          {/* Codeforces Stats */}
+          <div className="glass-card rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <Code2 className="w-5 h-5 text-primary" />
+                Codeforces
+                <span className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 text-xs font-mono rounded">EXPERT</span>
+              </h3>
+              <a 
+                href="https://codeforces.com/profile/max_verstappen_goat1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                @max_verstappen_goat1 →
+              </a>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 rounded-lg bg-secondary/50">
+                <p className="text-2xl font-bold text-cyan-400">1844</p>
+                <p className="text-xs text-muted-foreground">rating</p>
+                <p className="text-sm text-foreground mt-1">Contest Rating</p>
               </div>
-            ))}
+              <div className="text-center p-4 rounded-lg bg-secondary/50">
+                <p className="text-2xl font-bold text-cyan-400">55</p>
+                <p className="text-xs text-muted-foreground">solved</p>
+                <p className="text-sm text-foreground mt-1">Problems</p>
+              </div>
+            </div>
+          </div>
+
+          {/* LeetCode Stats */}
+          <div className="glass-card rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-foreground flex items-center gap-2">
+                <Code2 className="w-5 h-5 text-primary" />
+                LeetCode
+                <span className="px-2 py-0.5 bg-terminal-amber/10 text-terminal-amber text-xs font-mono rounded">EXPERT</span>
+              </h3>
+              <div className="flex gap-3">
+                <a 
+                  href="https://leetcode.com/ice__fizz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+                >
+                  @ice__fizz →
+                </a>
+                <a 
+                  href="https://leetcode.com/_rinfizz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+                >
+                  @_rinfizz →
+                </a>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { label: 'Global Rank', value: '~18.5K', subtext: 'among 5M+' },
+                { label: 'Problems Solved', value: '1061', subtext: '/3647' },
+                { label: 'Contest Rating', value: '1981', subtext: 'points' },
+                { label: 'DSA Mastery', value: '80%', subtext: 'completed' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center p-4 rounded-lg bg-secondary/50">
+                  <p className="text-2xl font-bold text-terminal-amber">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.subtext}</p>
+                  <p className="text-sm text-foreground mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

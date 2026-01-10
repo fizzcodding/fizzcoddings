@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import oldPcMonitor from '@/assets/old-pc-monitor.png';
 
 interface BootSequenceProps {
   onComplete: () => void;
@@ -89,45 +90,44 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
     return `${hours}:${mins}:${secs}`;
   };
 
-  const getLineColor = (type: string) => {
-    switch (type) {
-      case 'header': return 'text-terminal-green';
-      case 'success': return 'text-terminal-green';
-      case 'process': return 'text-terminal-green';
-      case 'status': return 'text-terminal-green';
-      default: return 'text-terminal-green';
-    }
-  };
-
   return (
     <motion.div 
-      className="fixed inset-0 bg-[#1a1a2e] z-50 flex items-center justify-center p-4 overflow-hidden"
+      className="fixed inset-0 bg-[#c5c7cc] z-50 flex items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Old PC Monitor Frame */}
+      {/* Old PC with Monitor - using actual image */}
       <div className="relative w-full max-w-3xl">
-        {/* Monitor bezel */}
-        <div className="bg-[#c4c4b4] rounded-xl p-6 shadow-2xl">
-          {/* Monitor brand label */}
-          <div className="flex items-center justify-between mb-2 px-2">
-            <span className="text-[10px] text-gray-600 font-sans">⬚ Schneider</span>
-            <span className="text-[10px] text-gray-600 font-sans">PC_fizz</span>
-          </div>
+        {/* PC Image Container */}
+        <div className="relative">
+          <img 
+            src={oldPcMonitor} 
+            alt="Old PC Monitor"
+            className="w-full h-auto"
+          />
           
-          {/* Screen area */}
-          <div className="bg-[#0a0a12] rounded-lg p-6 relative overflow-hidden border-4 border-[#2a2a3a] shadow-[inset_0_0_50px_rgba(0,0,0,0.8)]">
+          {/* Screen overlay - positioned on the monitor screen area */}
+          <div 
+            className="absolute overflow-hidden"
+            style={{
+              top: '8%',
+              left: '22%',
+              width: '56%',
+              height: '42%',
+              borderRadius: '4px',
+            }}
+          >
             {/* CRT scan lines effect */}
-            <div className="absolute inset-0 pointer-events-none opacity-10">
-              <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,0,0.03)_2px,rgba(0,255,0,0.03)_4px)]" />
+            <div className="absolute inset-0 pointer-events-none opacity-20">
+              <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,0,0.05)_2px,rgba(0,255,0,0.05)_4px)]" />
             </div>
             
-            {/* CRT curvature overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.3)_100%)]" />
+            {/* CRT glow effect */}
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)]" />
 
-            {/* Boot terminal */}
-            <div className={`font-mono text-sm space-y-1 min-h-[300px] transition-opacity duration-300 ${phase === 'chaos' ? 'opacity-30' : 'opacity-100'}`}>
+            {/* Boot terminal content */}
+            <div className={`p-3 font-mono text-[10px] sm:text-xs space-y-0.5 h-full overflow-hidden transition-opacity duration-300 ${phase === 'chaos' ? 'opacity-30' : 'opacity-100'}`}>
               <AnimatePresence>
                 {bootLines.map((line, index) => (
                   visibleLines.includes(index) && (
@@ -135,10 +135,10 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
                       key={index}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="flex items-start gap-4"
+                      className="flex items-start gap-2"
                     >
                       <span className="text-terminal-green/60 shrink-0">[{getTimestamp()}]</span>
-                      <span className={getLineColor(line.type)}>{line.text}</span>
+                      <span className="text-terminal-green">{line.text}</span>
                     </motion.div>
                   )
                 ))}
@@ -146,14 +146,14 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
 
               {/* Progress bar */}
               <motion.div 
-                className="mt-6 pt-4"
+                className="mt-4 pt-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <div className="flex items-center gap-4">
-                  <span className="text-terminal-green/60 text-xs">SYSTEM LOAD</span>
-                  <div className="flex-1 h-2 bg-[#0a2a0a] rounded overflow-hidden border border-terminal-green/30">
+                <div className="flex items-center gap-2">
+                  <span className="text-terminal-green/60 text-[8px] sm:text-[10px]">LOAD</span>
+                  <div className="flex-1 h-1.5 bg-[#0a2a0a] rounded overflow-hidden border border-terminal-green/30">
                     <motion.div 
                       className="h-full bg-terminal-green"
                       initial={{ width: 0 }}
@@ -161,7 +161,7 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
                       transition={{ duration: 0.3 }}
                     />
                   </div>
-                  <span className="text-terminal-green font-bold text-sm">{progress}%</span>
+                  <span className="text-terminal-green font-bold text-[10px]">{progress}%</span>
                 </div>
               </motion.div>
             </div>
@@ -174,7 +174,7 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
                     visibleErrors.includes(index) && (
                       <motion.div
                         key={index}
-                        className="absolute font-mono text-[10px] sm:text-xs text-red-500 bg-red-500/10 border border-red-500/40 px-2 py-1 rounded whitespace-nowrap"
+                        className="absolute font-mono text-[6px] sm:text-[8px] text-red-500 bg-red-500/10 border border-red-500/40 px-1 py-0.5 rounded whitespace-nowrap"
                         style={{ left: error.x, top: error.y }}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ 
@@ -197,13 +197,13 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
             <AnimatePresence>
               {phase === 'settling' && (
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center bg-[#0a0a12]/90"
+                  className="absolute inset-0 flex items-center justify-center bg-black/90"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
                   <motion.div
-                    className="font-mono text-base text-terminal-green px-6 py-3 rounded border border-terminal-green/50"
+                    className="font-mono text-[10px] sm:text-xs text-terminal-green px-3 py-2 rounded border border-terminal-green/50"
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                   >
@@ -213,19 +213,6 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
               )}
             </AnimatePresence>
           </div>
-          
-          {/* Monitor base indicator */}
-          <div className="flex justify-center mt-3">
-            <div className="w-3 h-3 rounded-full bg-terminal-green/80 shadow-[0_0_8px_rgba(0,255,0,0.5)]" />
-          </div>
-        </div>
-        
-        {/* Monitor stand */}
-        <div className="flex justify-center">
-          <div className="w-32 h-4 bg-[#b4b4a4] rounded-b-lg" />
-        </div>
-        <div className="flex justify-center">
-          <div className="w-48 h-3 bg-[#a4a494] rounded-b-lg" />
         </div>
       </div>
 
@@ -235,7 +222,7 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           onClick={onComplete}
-          className="absolute bottom-8 text-terminal-green/60 hover:text-terminal-green transition-colors font-mono text-sm"
+          className="absolute bottom-8 text-gray-600 hover:text-gray-800 transition-colors font-mono text-sm bg-white/50 px-4 py-2 rounded-lg backdrop-blur-sm"
         >
           Press any key or click to skip...
         </motion.button>

@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Home, Briefcase, FolderKanban, Code2, Mail } from 'lucide-react';
+import type { MouseEvent } from 'react';
 import { useRetroSound } from '@/hooks/useRetroSound';
 
 const sidebarItems = [
-  { icon: Home, href: '#', label: 'Home' },
+  { icon: Home, href: '#hero', label: 'Home' },
   { icon: Briefcase, href: '#experience', label: 'Experience' },
   { icon: FolderKanban, href: '#projects', label: 'Projects' },
   { icon: Code2, href: '#skills', label: 'Skills' },
@@ -15,13 +16,18 @@ export const IconSidebar = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     playClick();
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+
+    if (!href.startsWith('#')) return;
+
+    e.preventDefault();
+
+    if (href === '#' || href.length <= 1) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
+
+    const el = document.getElementById(href.slice(1));
+    el?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -29,7 +35,7 @@ export const IconSidebar = () => {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 0.3, duration: 0.5 }}
-      className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3"
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-60 hidden md:flex flex-col gap-3"
     >
       <div className="bg-background/30 backdrop-blur-md border border-border/30 rounded-xl p-2 flex flex-col gap-2">
         {sidebarItems.map((item, index) => (

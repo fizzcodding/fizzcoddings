@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Briefcase, MapPin } from 'lucide-react';
-
+import { useRetroSound } from '@/hooks/useRetroSound';
 const experiences = [
   {
     company: 'Freelance',
@@ -42,6 +42,8 @@ const itemVariants = {
 };
 
 export const ExperienceSection = () => {
+  const { playHover } = useRetroSound();
+  
   return (
     <section className="py-20 px-4" id="experience">
       <div className="max-w-4xl mx-auto">
@@ -68,7 +70,8 @@ export const ExperienceSection = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="glass-card rounded-xl p-6 group hover:border-primary/30 transition-all duration-300"
+              onMouseEnter={playHover}
+              className="glass-card rounded-xl p-6 group hover:border-primary/30 transition-all duration-300 chromatic-hover"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">

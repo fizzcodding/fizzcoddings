@@ -2,18 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
-
-const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' },
-];
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { playClick, playHover } = useRetroSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +16,11 @@ export const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleHireMe = () => {
+    playClick();
+    window.location.href = 'mailto:frozeplaysminecraft@gmail.com';
+  };
 
   return (
     <motion.nav
@@ -33,34 +32,26 @@ export const Navigation = () => {
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-end h-16 gap-4">
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="px-4 py-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-secondary/50"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
           {/* Theme Toggle */}
           <ThemeToggle />
 
           {/* Hire Me Button */}
-          <a
-            href="mailto:frozeplaysminecraft@gmail.com"
-            className="hidden md:block px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-all"
+          <button
+            onClick={handleHireMe}
+            onMouseEnter={playHover}
+            className="hidden md:block px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-all chromatic-hover glitch-hover"
           >
             Hire Me
-          </a>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            onClick={() => {
+              playClick();
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
+            onMouseEnter={playHover}
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors chromatic-hover"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -75,22 +66,13 @@ export const Navigation = () => {
             className="md:hidden py-4 border-t border-border"
           >
             <div className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 font-mono text-muted-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-colors"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href="mailto:frozeplaysminecraft@gmail.com"
-                className="mx-4 mt-2 px-4 py-3 bg-primary text-primary-foreground text-center font-medium rounded-lg"
+              <button
+                onClick={handleHireMe}
+                onMouseEnter={playHover}
+                className="mx-4 mt-2 px-4 py-3 bg-primary text-primary-foreground text-center font-medium rounded-lg chromatic-hover"
               >
                 Hire Me
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

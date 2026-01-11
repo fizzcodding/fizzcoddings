@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Linkedin } from 'lucide-react';
 import profileImage from '@/assets/profile.jpg';
+import { TypewriterTitle } from './TypewriterTitle';
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 const languages = [
   'TypeScript', 'JavaScript', 'Python', 'C++', 'C#', 'Dart', 'Java', 'HTML5', 'CSS3'
 ];
 
 export const HeroSection = () => {
+  const { playClick, playHover } = useRetroSound();
 
   const socials = [
     { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
@@ -57,7 +60,7 @@ export const HeroSection = () => {
           className="mb-8"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="font-mono text-sm text-muted-foreground">IDENTITY:</span>
             <span className="font-mono text-sm text-foreground">FAIYAZ BIN IQBAL</span>
             <span className="font-mono text-xs text-primary">(FIZZ)</span>
@@ -72,12 +75,9 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-2 font-mono italic glitch">
-                Web
-              </h1>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 font-mono">
-                Developer<span className="cursor-blink text-primary">_</span>
-              </h1>
+              {/* Typewriter Title */}
+              <TypewriterTitle />
+              
               <p className="text-lg text-muted-foreground mb-8">
                 Fullstack + <span className="text-primary retro-underline">Vibe Coder</span>, Robotics Expert
               </p>
@@ -117,7 +117,9 @@ export const HeroSection = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card/50 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card/50 hover:border-primary hover:bg-primary/5 transition-all duration-300 group chromatic-hover glitch-hover"
                 >
                   <social.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   <span className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition-colors">
@@ -165,6 +167,7 @@ export const HeroSection = () => {
                   <div>
                     <p className="text-xs text-primary font-mono">WEB_DEVELOPER</p>
                     <p className="text-sm font-semibold text-foreground">Faiyaz Bin Iqbal</p>
+                    <p className="text-xs text-muted-foreground font-mono italic mt-0.5">"There isn't no end to learning"</p>
                   </div>
                 </div>
                 <Code2 className="w-5 h-5 text-primary" />
@@ -220,7 +223,9 @@ export const HeroSection = () => {
                 </div>
                 <a
                   href="mailto:frozeplaysminecraft@gmail.com"
-                  className="font-mono text-xs text-foreground hover:text-primary transition-colors"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className="font-mono text-xs text-foreground hover:text-primary transition-colors chromatic-hover"
                 >
                   Open to Projects
                 </a>

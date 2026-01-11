@@ -10,6 +10,8 @@ import { ContactSection } from '@/components/ContactSection';
 import { CustomCursor } from '@/components/CustomCursor';
 import { NameBadge } from '@/components/NameBadge';
 import { RetroEffects } from '@/components/RetroEffects';
+import { CRTFrame } from '@/components/CRTFrame';
+import { IconSidebar } from '@/components/IconSidebar';
 
 const Index = () => {
   const [showBoot, setShowBoot] = useState(true);
@@ -37,7 +39,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen crt-flicker">
+    <div className="min-h-screen">
       <CustomCursor />
       
       <AnimatePresence mode="wait">
@@ -47,18 +49,21 @@ const Index = () => {
       </AnimatePresence>
 
       {!showBoot && (
-        <>
-          <RetroEffects />
-          <NameBadge />
-          <Navigation />
-          <main className="relative z-50">
-            <HeroSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <SkillsSection />
-            <ContactSection />
-          </main>
-        </>
+        <CRTFrame>
+          <div className="crt-flicker">
+            <RetroEffects />
+            <NameBadge />
+            <Navigation />
+            <IconSidebar />
+            <main className="relative z-50">
+              <HeroSection />
+              <ExperienceSection />
+              <ProjectsSection />
+              <SkillsSection />
+              <ContactSection />
+            </main>
+          </div>
+        </CRTFrame>
       )}
     </div>
   );

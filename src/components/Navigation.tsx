@@ -35,7 +35,7 @@ export const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-60 transition-all duration-300 ${
         isScrolled ? 'bg-background/80 backdrop-blur-lg border-b border-border' : ''
       }`}
     >
@@ -43,11 +43,23 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
+            type="button"
             onClick={() => scrollToSection('hero')}
             onMouseEnter={playHover}
-            className="font-mono text-xl font-bold text-primary hover:opacity-80 transition-opacity chromatic-hover"
+            className="group flex items-center gap-3 rounded-xl border border-border/60 bg-secondary/40 px-4 py-2 backdrop-blur-sm transition-colors hover:bg-secondary/60 chromatic-hover"
+            aria-label="Go to top"
           >
-            Fizz_World
+            <span className="flex items-center gap-1.5" aria-hidden>
+              <span className="h-2 w-2 rounded-full bg-destructive/80" />
+              <span className="h-2 w-2 rounded-full bg-terminal-amber/80" />
+              <span className="h-2 w-2 rounded-full bg-primary/80" />
+            </span>
+            <span className="font-mono text-sm text-primary" aria-hidden>
+              {">_"}
+            </span>
+            <span className="font-mono text-base font-semibold text-foreground">
+              Fizz_World
+            </span>
           </button>
 
           {/* Right side controls */}

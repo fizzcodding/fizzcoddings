@@ -18,9 +18,6 @@ const Index = () => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // Apply dark mode by default
-    document.documentElement.classList.add('dark');
-
     // Handle keyboard press to skip boot
     const handleKeyPress = () => {
       if (showBoot) {
@@ -55,7 +52,7 @@ const Index = () => {
             <NameBadge />
             <Navigation />
             <IconSidebar />
-            <main className="relative z-50">
+            <main className="relative">
               <HeroSection />
               <ExperienceSection />
               <ProjectsSection />

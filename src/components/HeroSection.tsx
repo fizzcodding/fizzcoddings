@@ -24,7 +24,7 @@ export const HeroSection = () => {
   ];
 
   return (
-    <section className="min-h-screen flex items-center px-4 py-20 relative overflow-hidden">
+    <section className="min-h-screen flex items-center px-4 py-20 relative overflow-hidden scanlines">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
@@ -72,14 +72,14 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-2 font-mono italic">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-2 font-mono italic glitch">
                 Web
               </h1>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 font-mono">
-                Developer
+                Developer<span className="cursor-blink text-primary">_</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Fullstack + <span className="text-primary">Vibe Coder</span>, Robotics Expert
+                Fullstack + <span className="text-primary retro-underline">Vibe Coder</span>, Robotics Expert
               </p>
             </motion.div>
 

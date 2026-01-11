@@ -64,9 +64,9 @@ export const ProjectsSection = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
-            <FolderGit2 className="w-7 h-7 text-primary" />
-            Projects<span className="text-primary">.</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3 glitch">
+            <FolderGit2 className="w-7 h-7 text-primary retro-blink" />
+            <span className="retro-underline">Projects</span><span className="text-primary cursor-blink">_</span>
           </h2>
         </motion.div>
 

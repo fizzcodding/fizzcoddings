@@ -9,6 +9,7 @@ import { SkillsSection } from '@/components/SkillsSection';
 import { ContactSection } from '@/components/ContactSection';
 import { CustomCursor } from '@/components/CustomCursor';
 import { NameBadge } from '@/components/NameBadge';
+import { RetroEffects } from '@/components/RetroEffects';
 
 const Index = () => {
   const [showBoot, setShowBoot] = useState(true);
@@ -36,7 +37,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen crt-flicker">
       <CustomCursor />
       
       <AnimatePresence mode="wait">
@@ -47,9 +48,10 @@ const Index = () => {
 
       {!showBoot && (
         <>
+          <RetroEffects />
           <NameBadge />
           <Navigation />
-          <main>
+          <main className="relative z-50">
             <HeroSection />
             <ExperienceSection />
             <ProjectsSection />

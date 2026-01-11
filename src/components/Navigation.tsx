@@ -22,6 +22,15 @@ export const Navigation = () => {
     window.location.href = 'mailto:frozeplaysminecraft@gmail.com';
   };
 
+  const scrollToSection = (sectionId: string) => {
+    playClick();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -31,7 +40,18 @@ export const Navigation = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-end h-16 gap-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('hero')}
+            onMouseEnter={playHover}
+            className="font-mono text-xl font-bold text-primary hover:opacity-80 transition-opacity chromatic-hover"
+          >
+            Fizz_World
+          </button>
+
+          {/* Right side controls */}
+          <div className="flex items-center gap-4">
           {/* Theme Toggle */}
           <ThemeToggle />
 
@@ -55,6 +75,7 @@ export const Navigation = () => {
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

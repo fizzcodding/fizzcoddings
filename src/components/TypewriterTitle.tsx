@@ -54,7 +54,7 @@ export const TypewriterTitle = () => {
 
   return (
     <div className="font-mono">
-      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4">
+      <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-foreground mb-4">
         <AnimatePresence mode="wait">
           <motion.span
             key={displayedText}

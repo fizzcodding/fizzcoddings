@@ -31,7 +31,7 @@ const RetroParticle = ({ delay, x, y }: { delay: number; x: number; y: number })
 const VHSTrackingLine = () => {
   return (
     <motion.div
-      className="fixed left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none z-50"
+      className="fixed left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none -z-50"
       initial={{ top: '-2px' }}
       animate={{ top: '100%' }}
       transition={{
@@ -46,7 +46,7 @@ const VHSTrackingLine = () => {
 // Scanline overlay
 const ScanlineOverlay = () => {
   return (
-    <div className="fixed inset-0 pointer-events-none z-40 opacity-30">
+    <div className="fixed inset-0 pointer-events-none -z-50 opacity-30">
       <div 
         className="w-full h-full"
         style={{
@@ -82,7 +82,7 @@ const GlitchBlock = ({ delay }: { delay: number }) => {
   
   return (
     <motion.div
-      className="fixed pointer-events-none z-30 bg-primary/5"
+      className="fixed pointer-events-none -z-50 bg-primary/5"
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -106,7 +106,7 @@ const MatrixRain = () => {
   const columns = 15;
   
   return (
-    <div className="fixed inset-0 pointer-events-none z-20 overflow-hidden opacity-20">
+    <div className="fixed inset-0 pointer-events-none -z-50 overflow-hidden opacity-20">
       {[...Array(columns)].map((_, i) => (
         <motion.div
           key={i}
@@ -136,7 +136,7 @@ const MatrixRain = () => {
 const CRTVignette = () => {
   return (
     <div 
-      className="fixed inset-0 pointer-events-none z-30"
+      className="fixed inset-0 pointer-events-none -z-50"
       style={{
         background: `radial-gradient(
           ellipse at center,
@@ -171,7 +171,7 @@ const TerminalCursor = ({ x, y, delay }: { x: number; y: number; delay: number }
 const RetroGrid = () => {
   return (
     <div 
-      className="fixed inset-0 pointer-events-none z-10 opacity-[0.02]"
+      className="fixed inset-0 pointer-events-none -z-50 opacity-[0.02]"
       style={{
         backgroundImage: `
           linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
@@ -215,14 +215,14 @@ export const RetroEffects = () => {
       <MatrixRain />
       
       {/* Floating particles */}
-      <div className="fixed inset-0 pointer-events-none z-20">
+      <div className="fixed inset-0 pointer-events-none -z-50">
         {particles.map((p, i) => (
           <RetroParticle key={i} {...p} />
         ))}
       </div>
       
       {/* Scattered cursors */}
-      <div className="fixed inset-0 pointer-events-none z-20">
+      <div className="fixed inset-0 pointer-events-none -z-50">
         {cursors.map((c, i) => (
           <TerminalCursor key={i} {...c} />
         ))}

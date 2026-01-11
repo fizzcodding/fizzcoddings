@@ -5,10 +5,6 @@ import profileImage from '@/assets/profile.jpg';
 import { TypewriterTitle } from './TypewriterTitle';
 import { useRetroSound } from '@/hooks/useRetroSound';
 
-const languages = [
-  'TypeScript', 'JavaScript', 'Python', 'C++', 'C#', 'Dart', 'Java', 'HTML5', 'CSS3'
-];
-
 // Large pixel Earth for hero background
 const LargePixelEarth = () => (
   <svg viewBox="0 0 32 32" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
@@ -137,7 +133,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-50">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
@@ -175,9 +171,11 @@ export const HeroSection = () => {
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left column - Main content */}
-          <div>
+        {/* Combined card for main content and profile - only on larger screens */}
+        <div className="lg:glass-card lg:rounded-xl lg:p-6 lg:border lg:border-border/50">
+          <div className="flex flex-col lg:flex-row gap-12 items-center justify-center">
+            {/* Left column - Main content */}
+            <div className="w-full lg:w-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -236,22 +234,6 @@ export const HeroSection = () => {
                 </a>
               ))}
             </motion.div>
-
-            {/* Made by footer */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="mt-8 pt-4 border-t border-dashed border-primary/30"
-            >
-              <div className="font-mono text-xs">
-                <span className="text-primary/50">10100101 01010010 01100000 01010000 111</span>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-primary">Made By Faiyaz</span>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
           {/* Right column - Profile card */}
@@ -259,9 +241,9 @@ export const HeroSection = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="relative"
+            className="relative flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-start"
           >
-            <div className="glass-card rounded-xl p-6 border border-border/50 max-w-sm ml-auto">
+            <div className="glass-card rounded-xl p-6 border border-border/50 max-w-sm">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
@@ -296,33 +278,6 @@ export const HeroSection = () => {
                 ))}
               </div>
 
-              {/* Languages Carousel */}
-              <div className="mb-4 py-3 border-t border-b border-border/50 overflow-hidden">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-mono text-xs text-muted-foreground">LANGUAGES:</span>
-                </div>
-                <div className="relative overflow-hidden">
-                  <motion.div
-                    className="flex gap-2"
-                    animate={{ x: [0, -50 * languages.length] }}
-                    transition={{
-                      x: {
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "linear",
-                      },
-                    }}
-                  >
-                    {/* Duplicate languages for seamless loop */}
-                    {[...languages, ...languages].map((lang, i) => (
-                      <span key={`${lang}-${i}`} className="skill-tag text-xs whitespace-nowrap shrink-0">
-                        {lang}
-                      </span>
-                    ))}
-                  </motion.div>
-                </div>
-              </div>
-
               {/* Status */}
               <div className="flex items-center justify-between pt-4 border-t border-border">
                 <div className="flex items-center gap-2">
@@ -343,7 +298,24 @@ export const HeroSection = () => {
             {/* Decorative elements */}
             <div className="absolute -z-10 top-1/2 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
           </motion.div>
+          </div>
         </div>
+
+        {/* Made by footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-8 pt-4 border-t border-dashed border-primary/30"
+        >
+          <div className="font-mono text-xs">
+            <span className="text-primary/50">10100101 01010010 01100000 01010000 111</span>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="text-primary">Made By Faiyaz</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

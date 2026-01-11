@@ -49,7 +49,7 @@ const Index = () => {
         <CRTFrame>
           <div className="crt-flicker">
             <RetroEffects />
-            <NameBadge />
+           
             <Navigation />
             <IconSidebar />
             <main className="relative">

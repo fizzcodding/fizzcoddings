@@ -108,13 +108,26 @@ export const SkillsSection = () => {
           
           <div className="grid md:grid-cols-2 gap-6">
             {/* Codeforces */}
-            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-sm text-foreground font-semibold">Codeforces</span>
-                <span className="px-2 py-0.5 bg-cyan-500/10 text-cyan-400 text-xs font-mono rounded">
-                  Expert
-                </span>
-              </div>
+            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 relative overflow-hidden">
+              {/* Glow effect background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent animate-pulse" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-sm text-foreground font-semibold">Codeforces</span>
+                  <motion.span 
+                    className="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs font-mono rounded-full border border-cyan-400/30 shadow-[0_0_15px_hsl(187_100%_50%/0.4)]"
+                    animate={{ 
+                      boxShadow: [
+                        '0 0 10px hsl(187 100% 50% / 0.3)',
+                        '0 0 20px hsl(187 100% 50% / 0.5)',
+                        '0 0 10px hsl(187 100% 50% / 0.3)'
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    ⚡ Expert
+                  </motion.span>
+                </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-muted-foreground">Rank</span>
@@ -135,17 +148,31 @@ export const SkillsSection = () => {
                     max_verstappen_goat1 <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
+                </div>
               </div>
             </div>
 
             {/* LeetCode */}
-            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50">
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-sm text-foreground font-semibold">LeetCode</span>
-                <span className="px-2 py-0.5 bg-terminal-amber/10 text-terminal-amber text-xs font-mono rounded">
-                  Knight
-                </span>
-              </div>
+            <div className="p-4 rounded-lg bg-secondary/50 border border-border/50 relative overflow-hidden">
+              {/* Glow effect background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent animate-pulse" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-sm text-foreground font-semibold">LeetCode</span>
+                  <motion.span 
+                    className="px-3 py-1 bg-amber-500/20 text-terminal-amber text-xs font-mono rounded-full border border-amber-400/30 shadow-[0_0_15px_hsl(38_92%_50%/0.4)]"
+                    animate={{ 
+                      boxShadow: [
+                        '0 0 10px hsl(38 92% 50% / 0.3)',
+                        '0 0 20px hsl(38 92% 50% / 0.5)',
+                        '0 0 10px hsl(38 92% 50% / 0.3)'
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  >
+                    ♞ Knight
+                  </motion.span>
+                </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-muted-foreground">Global Ranking</span>
@@ -178,6 +205,7 @@ export const SkillsSection = () => {
                     >
                       _rinfizz <ExternalLink className="w-3 h-3" />
                     </a>
+                    </div>
                   </div>
                 </div>
               </div>

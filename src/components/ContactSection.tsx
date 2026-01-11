@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Github, Linkedin, Code2, Globe } from 'lucide-react';
+import { Mail, MapPin, Phone, Github, Linkedin, Code2, Globe, Twitter } from 'lucide-react';
 import { useRetroSound } from '@/hooks/useRetroSound';
 
 const socials = [
-  { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GitHub', username: '@fizz7-ui' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/faiyaz', label: 'LinkedIn', username: '/faiyaz' },
+  { icon: Github, href: 'https://github.com/fizzcodding', label: 'GitHub', username: '@fizz7-ui' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/faiyaz-bin-iqbal-b494162bb/', label: 'LinkedIn', username: '/faiyaz-bin-iqbal' },
   { icon: Code2, href: 'https://leetcode.com/u/ice__fizz', label: 'LeetCode', username: '@ice__fizz' },
-  { icon: Globe, href: 'https://fizzfolios.vercel.app', label: 'Portfolio', username: 'fizzfolios.vercel.app' },
+  { icon: Twitter, href: 'https://x.com/fizzcodding', label: 'Portfolio', username: '@fizzcodding' },
 ];
 
 export const ContactSection = () => {

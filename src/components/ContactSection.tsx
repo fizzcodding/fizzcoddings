@@ -18,9 +18,9 @@ export const ContactSection = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
-            <Mail className="w-7 h-7 text-primary" />
-            Get In Touch<span className="text-primary">.</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3 glitch">
+            <Mail className="w-7 h-7 text-primary retro-blink" />
+            <span className="retro-underline">Get In Touch</span><span className="text-primary cursor-blink">_</span>
           </h2>
         </motion.div>
 
@@ -109,12 +109,11 @@ export const ContactSection = () => {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <p className="text-sm text-muted-foreground font-mono">
-            <span className="text-primary">{'<'}</span>
-            Built with React & Tailwind
-            <span className="text-primary">{' />'}</span>
+          <p className="text-sm text-muted-foreground font-mono terminal-prompt">
+            <span className="text-terminal-green">{'>'}</span>
+            <span className="matrix-glow"> Built with React & Tailwind</span>
           </p>
-          <p className="text-xs text-muted-foreground mt-2">
+          <p className="text-xs text-muted-foreground mt-2 retro-blink">
             © 2025 Faiyaz Bin Iqbal. All rights reserved.
           </p>
         </motion.div>

@@ -199,4 +199,216 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
+
+  /* Retro Scanline Effect */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--primary) / 0.03) 2px,
+      hsl(var(--primary) / 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* CRT Flicker */
+  .crt-flicker {
+    animation: crt-flicker 0.15s infinite;
+  }
+
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.98; }
+    75% { opacity: 0.99; }
+  }
+
+  /* Glitch Effect */
+  .glitch {
+    animation: glitch 3s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 95%, 100% {
+      transform: translate(0);
+      filter: none;
+    }
+    96% {
+      transform: translate(-2px, 1px);
+      filter: hue-rotate(90deg);
+    }
+    97% {
+      transform: translate(2px, -1px);
+      filter: hue-rotate(-90deg);
+    }
+    98% {
+      transform: translate(-1px, -1px);
+      filter: hue-rotate(45deg);
+    }
+    99% {
+      transform: translate(1px, 1px);
+      filter: hue-rotate(-45deg);
+    }
+  }
+
+  /* Retro blink */
+  .retro-blink {
+    animation: retro-blink 1.5s steps(2) infinite;
+  }
+
+  @keyframes retro-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* VHS tracking lines */
+  .vhs-tracking {
+    animation: vhs-tracking 8s linear infinite;
+  }
+
+  @keyframes vhs-tracking {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  /* Matrix rain glow */
+  .matrix-glow {
+    text-shadow: 
+      0 0 5px hsl(var(--terminal-green)),
+      0 0 10px hsl(var(--terminal-green) / 0.8),
+      0 0 20px hsl(var(--terminal-green) / 0.6);
+  }
+
+  /* Retro pixel border */
+  .pixel-border {
+    box-shadow: 
+      inset 0 0 0 2px hsl(var(--border)),
+      inset 4px 4px 0 0 hsl(var(--primary) / 0.1),
+      inset -4px -4px 0 0 hsl(var(--primary) / 0.05);
+  }
+
+  /* Static noise */
+  .static-noise {
+    animation: static-noise 0.5s steps(10) infinite;
+  }
+
+  @keyframes static-noise {
+    0%, 100% { background-position: 0 0; }
+    10% { background-position: -5% -10%; }
+    20% { background-position: -15% 5%; }
+    30% { background-position: 7% -25%; }
+    40% { background-position: -5% 25%; }
+    50% { background-position: -15% 10%; }
+    60% { background-position: 15% 0; }
+    70% { background-position: 0 15%; }
+    80% { background-position: 3% 35%; }
+    90% { background-position: -10% 10%; }
+  }
+
+  /* Chromatic aberration */
+  .chromatic {
+    position: relative;
+  }
+
+  .chromatic::before,
+  .chromatic::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+
+  .chromatic::before {
+    color: hsl(0 100% 50%);
+    animation: chromatic-r 2s infinite;
+    z-index: -1;
+  }
+
+  .chromatic::after {
+    color: hsl(200 100% 50%);
+    animation: chromatic-b 2s infinite;
+    z-index: -1;
+  }
+
+  @keyframes chromatic-r {
+    0%, 100% { transform: translate(-1px, 0); }
+    50% { transform: translate(1px, 0); }
+  }
+
+  @keyframes chromatic-b {
+    0%, 100% { transform: translate(1px, 0); }
+    50% { transform: translate(-1px, 0); }
+  }
+
+  /* Terminal prompt animation */
+  .terminal-prompt::after {
+    content: '█';
+    animation: cursor-blink 1s step-end infinite;
+    margin-left: 2px;
+  }
+
+  /* Retro underline */
+  .retro-underline {
+    position: relative;
+  }
+
+  .retro-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary)),
+      hsl(var(--primary)) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    animation: dash-scroll 1s linear infinite;
+  }
+
+  @keyframes dash-scroll {
+    from { background-position: 0 0; }
+    to { background-position: 16px 0; }
+  }
+
+  /* Fade scan */
+  .fade-scan {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fade-scan::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--primary) / 0.1),
+      transparent
+    );
+    animation: scan-down 4s linear infinite;
+  }
+
+  @keyframes scan-down {
+    0% { top: -20px; }
+    100% { top: 100%; }
+  }
 }

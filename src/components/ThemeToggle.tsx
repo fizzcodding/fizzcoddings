@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sun, Moon } from 'lucide-react';
+import { PixelEarth, PixelBlackhole } from './PixelArt';
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 export const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(true);
+  const { playClick } = useRetroSound();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -18,27 +20,20 @@ export const ThemeToggle = () => {
 
   return (
     <motion.button
-      onClick={() => setIsDark(!isDark)}
-      className="relative w-14 h-7 rounded-full bg-secondary border border-border p-1 transition-colors hover:border-primary"
+      onClick={() => {
+        playClick();
+        setIsDark(!isDark);
+      }}
+      className="relative p-2 rounded-lg bg-secondary border border-border transition-colors hover:border-primary chromatic-hover"
       whileTap={{ scale: 0.95 }}
+      title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
       <motion.div
-        className="absolute inset-1 flex items-center"
         initial={false}
+        animate={{ rotate: isDark ? 0 : 360 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.div
-          className="w-5 h-5 rounded-full bg-primary flex items-center justify-center"
-          animate={{
-            x: isDark ? 0 : 26,
-          }}
-          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        >
-          {isDark ? (
-            <Moon className="w-3 h-3 text-primary-foreground" />
-          ) : (
-            <Sun className="w-3 h-3 text-primary-foreground" />
-          )}
-        </motion.div>
+        {isDark ? <PixelBlackhole /> : <PixelEarth />}
       </motion.div>
     </motion.button>
   );

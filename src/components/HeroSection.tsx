@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, MessageSquare, Mail, Twitter, Sparkles, Code2, Linkedin } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import profileImage from '@/assets/profile.jpg';
 import { TypewriterTitle } from './TypewriterTitle';
 import { useRetroSound } from '@/hooks/useRetroSound';
@@ -8,8 +9,104 @@ const languages = [
   'TypeScript', 'JavaScript', 'Python', 'C++', 'C#', 'Dart', 'Java', 'HTML5', 'CSS3'
 ];
 
+// Large pixel Earth for hero background
+const LargePixelEarth = () => (
+  <svg viewBox="0 0 32 32" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+    {/* Ocean base */}
+    <rect x="8" y="2" width="16" height="2" fill="#4A90D9" />
+    <rect x="4" y="4" width="24" height="2" fill="#4A90D9" />
+    <rect x="2" y="6" width="28" height="2" fill="#4A90D9" />
+    <rect x="2" y="8" width="28" height="2" fill="#4A90D9" />
+    <rect x="0" y="10" width="32" height="2" fill="#4A90D9" />
+    <rect x="0" y="12" width="32" height="2" fill="#4A90D9" />
+    <rect x="0" y="14" width="32" height="2" fill="#4A90D9" />
+    <rect x="0" y="16" width="32" height="2" fill="#4A90D9" />
+    <rect x="0" y="18" width="32" height="2" fill="#4A90D9" />
+    <rect x="0" y="20" width="32" height="2" fill="#4A90D9" />
+    <rect x="2" y="22" width="28" height="2" fill="#4A90D9" />
+    <rect x="2" y="24" width="28" height="2" fill="#4A90D9" />
+    <rect x="4" y="26" width="24" height="2" fill="#4A90D9" />
+    <rect x="8" y="28" width="16" height="2" fill="#4A90D9" />
+    
+    {/* Land masses - scaled up */}
+    <rect x="6" y="6" width="6" height="2" fill="#3CB371" />
+    <rect x="4" y="8" width="8" height="2" fill="#3CB371" />
+    <rect x="6" y="10" width="6" height="2" fill="#3CB371" />
+    <rect x="8" y="12" width="4" height="2" fill="#3CB371" />
+    
+    <rect x="18" y="8" width="8" height="2" fill="#3CB371" />
+    <rect x="16" y="10" width="12" height="2" fill="#3CB371" />
+    <rect x="18" y="12" width="10" height="2" fill="#3CB371" />
+    <rect x="20" y="14" width="8" height="2" fill="#3CB371" />
+    <rect x="22" y="16" width="6" height="2" fill="#3CB371" />
+    
+    <rect x="8" y="18" width="6" height="2" fill="#3CB371" />
+    <rect x="6" y="20" width="10" height="2" fill="#3CB371" />
+    <rect x="8" y="22" width="8" height="2" fill="#3CB371" />
+    <rect x="10" y="24" width="4" height="2" fill="#3CB371" />
+  </svg>
+);
+
+// Large pixel Blackhole for hero background (dark mode)
+const LargePixelBlackhole = () => (
+  <svg viewBox="0 0 32 32" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+    {/* Accretion disk - outer ring */}
+    <rect x="6" y="0" width="20" height="2" fill="#FF6B6B" />
+    <rect x="2" y="2" width="6" height="2" fill="#FF8E53" />
+    <rect x="24" y="2" width="6" height="2" fill="#FF8E53" />
+    <rect x="0" y="4" width="4" height="2" fill="#FFD93D" />
+    <rect x="28" y="4" width="4" height="2" fill="#FFD93D" />
+    
+    <rect x="0" y="6" width="2" height="2" fill="#FF8E53" />
+    <rect x="30" y="6" width="2" height="2" fill="#FF8E53" />
+    
+    <rect x="0" y="8" width="2" height="2" fill="#FF6B6B" />
+    <rect x="30" y="8" width="2" height="2" fill="#FF6B6B" />
+    
+    {/* Event horizon - black center */}
+    <rect x="10" y="10" width="12" height="2" fill="#0a0a0a" />
+    <rect x="8" y="12" width="16" height="2" fill="#0a0a0a" />
+    <rect x="8" y="14" width="16" height="2" fill="#000000" />
+    <rect x="8" y="16" width="16" height="2" fill="#000000" />
+    <rect x="8" y="18" width="16" height="2" fill="#0a0a0a" />
+    <rect x="10" y="20" width="12" height="2" fill="#0a0a0a" />
+    
+    {/* Bottom accretion */}
+    <rect x="0" y="22" width="2" height="2" fill="#FF6B6B" />
+    <rect x="30" y="22" width="2" height="2" fill="#FF6B6B" />
+    
+    <rect x="0" y="24" width="2" height="2" fill="#FF8E53" />
+    <rect x="30" y="24" width="2" height="2" fill="#FF8E53" />
+    
+    <rect x="0" y="26" width="4" height="2" fill="#FFD93D" />
+    <rect x="28" y="26" width="4" height="2" fill="#FFD93D" />
+    <rect x="2" y="28" width="6" height="2" fill="#FF8E53" />
+    <rect x="24" y="28" width="6" height="2" fill="#FF8E53" />
+    <rect x="6" y="30" width="20" height="2" fill="#FF6B6B" />
+    
+    {/* Inner glow rings */}
+    <rect x="6" y="10" width="2" height="2" fill="#9B59B6" />
+    <rect x="24" y="10" width="2" height="2" fill="#9B59B6" />
+    <rect x="6" y="20" width="2" height="2" fill="#9B59B6" />
+    <rect x="24" y="20" width="2" height="2" fill="#9B59B6" />
+  </svg>
+);
+
 export const HeroSection = () => {
   const { playClick, playHover } = useRetroSound();
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkTheme();
+    
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    
+    return () => observer.disconnect();
+  }, []);
 
   const socials = [
     { icon: Github, href: 'https://github.com/fizzcodding', label: 'GITHUB' },
@@ -27,7 +124,18 @@ export const HeroSection = () => {
   ];
 
   return (
-    <section className="min-h-screen flex items-center px-4 py-20 relative overflow-hidden scanlines">
+    <section id="hero" className="min-h-screen flex items-center px-4 py-20 relative overflow-hidden scanlines">
+      {/* Large Earth/Blackhole Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <motion.div
+          className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-10"
+          animate={{ rotate: isDark ? -360 : 360 }}
+          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+        >
+          {isDark ? <LargePixelBlackhole /> : <LargePixelEarth />}
+        </motion.div>
+      </div>
+
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (

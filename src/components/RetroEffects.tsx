@@ -101,16 +101,16 @@ const GlitchBlock = ({ delay }: { delay: number }) => {
   );
 };
 
-// Matrix-style falling characters
+// Matrix-style falling characters - using primary color instead of green
 const MatrixRain = () => {
   const columns = 15;
   
   return (
-    <div className="fixed inset-0 pointer-events-none z-20 overflow-hidden opacity-30">
+    <div className="fixed inset-0 pointer-events-none z-20 overflow-hidden opacity-20">
       {[...Array(columns)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute top-0 font-mono text-xs text-terminal-green/40"
+          className="absolute top-0 font-mono text-xs text-primary/40"
           style={{ left: `${(i / columns) * 100}%` }}
           initial={{ y: -100 }}
           animate={{ y: '100vh' }}
@@ -149,11 +149,11 @@ const CRTVignette = () => {
   );
 };
 
-// Flickering terminal cursor scattered around
+// Flickering terminal cursor scattered around - using primary color
 const TerminalCursor = ({ x, y, delay }: { x: number; y: number; delay: number }) => {
   return (
     <motion.span
-      className="absolute font-mono text-terminal-green text-sm pointer-events-none select-none"
+      className="absolute font-mono text-primary/50 text-sm pointer-events-none select-none"
       style={{ left: `${x}%`, top: `${y}%` }}
       animate={{ opacity: [1, 0, 1] }}
       transition={{

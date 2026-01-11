@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Wrench, Code2, Cpu, Smartphone, Database, Palette, Bot, ExternalLink } from 'lucide-react';
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 const skillCategories = [
   {
@@ -48,6 +49,8 @@ const itemVariants = {
 };
 
 export const SkillsSection = () => {
+  const { playClick, playHover } = useRetroSound();
+  
   return (
     <section className="py-20 px-4" id="skills">
       <div className="max-w-4xl mx-auto">
@@ -74,7 +77,8 @@ export const SkillsSection = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="glass-card rounded-xl p-6 hover:border-primary/30 transition-all duration-300"
+              onMouseEnter={playHover}
+              className="glass-card rounded-xl p-6 hover:border-primary/30 transition-all duration-300 chromatic-hover"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
@@ -130,7 +134,9 @@ export const SkillsSection = () => {
                     href="https://codeforces.com/profile/max_verstappen_goat1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                    onClick={playClick}
+                    onMouseEnter={playHover}
+                    className="font-mono text-xs text-primary hover:underline flex items-center gap-1 chromatic-hover"
                   >
                     max_verstappen_goat1 <ExternalLink className="w-3 h-3" />
                   </a>
@@ -166,7 +172,9 @@ export const SkillsSection = () => {
                       href="https://leetcode.com/ice__fizz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                      onClick={playClick}
+                      onMouseEnter={playHover}
+                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1 chromatic-hover"
                     >
                       ice__fizz <ExternalLink className="w-3 h-3" />
                     </a>
@@ -174,7 +182,9 @@ export const SkillsSection = () => {
                       href="https://leetcode.com/_rinfizz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                      onClick={playClick}
+                      onMouseEnter={playHover}
+                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1 chromatic-hover"
                     >
                       _rinfizz <ExternalLink className="w-3 h-3" />
                     </a>

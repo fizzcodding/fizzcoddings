@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FolderGit2, Github, Bot, Cpu, Smartphone, Code2, Brain } from 'lucide-react';
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 const projects = [
   {
@@ -48,6 +49,8 @@ const itemVariants = {
 };
 
 export const ProjectsSection = () => {
+  const { playClick, playHover } = useRetroSound();
+  
   return (
     <section className="py-20 px-4 relative overflow-hidden" id="projects">
       {/* Background text */}
@@ -81,7 +84,8 @@ export const ProjectsSection = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="glass-card rounded-xl p-6 group hover:border-primary/30 transition-all duration-300"
+              onMouseEnter={playHover}
+              className="glass-card rounded-xl p-6 group hover:border-primary/30 transition-all duration-300 chromatic-hover"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
@@ -98,7 +102,8 @@ export const ProjectsSection = () => {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-primary transition-colors"
+                          onClick={playClick}
+                          className="text-muted-foreground hover:text-primary transition-colors chromatic-hover glitch-hover"
                         >
                           <Github className="w-4 h-4" />
                         </a>

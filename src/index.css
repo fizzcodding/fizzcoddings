@@ -411,4 +411,100 @@
     0% { top: -20px; }
     100% { top: 100%; }
   }
+
+  /* Chromatic aberration on hover - intensified RGB split */
+  .chromatic-hover {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .chromatic-hover::before,
+  .chromatic-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .chromatic-hover::before {
+    background: inherit;
+    filter: hue-rotate(-30deg);
+    transform: translate(-2px, 0);
+  }
+
+  .chromatic-hover::after {
+    background: inherit;
+    filter: hue-rotate(30deg);
+    transform: translate(2px, 0);
+  }
+
+  .chromatic-hover:hover::before,
+  .chromatic-hover:hover::after {
+    opacity: 0.3;
+  }
+
+  .chromatic-hover:hover {
+    animation: chromatic-shake 0.1s ease-in-out;
+    text-shadow: 
+      -2px 0 hsl(0 100% 50% / 0.5),
+      2px 0 hsl(200 100% 50% / 0.5);
+  }
+
+  @keyframes chromatic-shake {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+  }
+
+  /* Intense glitch on hover */
+  .glitch-hover:hover {
+    animation: glitch-intense 0.3s ease-in-out;
+  }
+
+  @keyframes glitch-intense {
+    0%, 100% {
+      transform: translate(0);
+      filter: none;
+    }
+    10% {
+      transform: translate(-3px, 2px);
+      filter: hue-rotate(90deg);
+    }
+    20% {
+      transform: translate(3px, -2px);
+      filter: hue-rotate(-90deg);
+    }
+    30% {
+      transform: translate(-2px, -2px) skewX(1deg);
+      filter: hue-rotate(45deg) saturate(150%);
+    }
+    40% {
+      transform: translate(2px, 2px) skewX(-1deg);
+      filter: hue-rotate(-45deg) saturate(150%);
+    }
+    50% {
+      transform: translate(-1px, 1px);
+      filter: hue-rotate(180deg);
+    }
+    60% {
+      transform: translate(1px, -1px);
+      filter: hue-rotate(-180deg);
+    }
+    70% {
+      transform: translate(-2px, 0) skewY(1deg);
+      filter: hue-rotate(90deg) brightness(120%);
+    }
+    80% {
+      transform: translate(2px, 0) skewY(-1deg);
+      filter: hue-rotate(-90deg) brightness(120%);
+    }
+    90% {
+      transform: translate(-1px, 1px);
+      filter: hue-rotate(45deg);
+    }
+  }
 }

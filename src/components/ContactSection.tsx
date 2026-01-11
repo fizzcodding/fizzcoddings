@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Github, Linkedin, Code2, Globe } from 'lucide-react';
+import { useRetroSound } from '@/hooks/useRetroSound';
 
 const socials = [
   { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GitHub', username: '@fizz7-ui' },
@@ -9,6 +10,8 @@ const socials = [
 ];
 
 export const ContactSection = () => {
+  const { playClick, playHover } = useRetroSound();
+  
   return (
     <section className="py-20 px-4" id="contact">
       <div className="max-w-4xl mx-auto">
@@ -36,7 +39,9 @@ export const ContactSection = () => {
             <div className="space-y-4">
               <a 
                 href="mailto:frozeplaysminecraft@gmail.com"
-                className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group chromatic-hover"
               >
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                   <Mail className="w-5 h-5 text-primary" />
@@ -49,7 +54,9 @@ export const ContactSection = () => {
               
               <a 
                 href="tel:+8801715088959"
-                className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group chromatic-hover"
               >
                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                   <Phone className="w-5 h-5 text-primary" />
@@ -82,12 +89,14 @@ export const ContactSection = () => {
             <h3 className="font-semibold text-foreground mb-6">Find Me Online</h3>
             <div className="grid grid-cols-2 gap-4">
               {socials.map((social) => (
-                <a
+                  <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group chromatic-hover glitch-hover"
                 >
                   <social.icon className="w-5 h-5 text-primary" />
                   <div>

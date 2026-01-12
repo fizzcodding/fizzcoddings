@@ -21,45 +21,48 @@ const PlaneModel = ({ onAnimationComplete }: PlaneModelProps) => {
     progressRef.current += delta * 0.35;
     const t = progressRef.current;
 
-    if (t < 1) {
-      // Phase 1: Approach - fly toward camera (0 to 1)
-      const approachT = Math.min(t, 1);
+    if (t < 1.2) {
+      // Phase 1: Approach - fly toward camera (0 to 1.2)
+      const approachT = Math.min(t / 1.2, 1);
       const eased = 1 - Math.pow(1 - approachT, 3);
       
-      groupRef.current.position.z = THREE.MathUtils.lerp(-100, 5, eased);
-      groupRef.current.position.y = 0;
+      groupRef.current.position.z = THREE.MathUtils.lerp(-80, 0, eased);
+      groupRef.current.position.y = THREE.MathUtils.lerp(-2, 0, eased);
       groupRef.current.rotation.x = 0;
       groupRef.current.rotation.y = Math.PI; // Face camera
-      groupRef.current.rotation.z = Math.sin(t * 8) * 0.03; // Subtle wobble
+      groupRef.current.rotation.z = Math.sin(t * 6) * 0.02; // Subtle wobble
       
-      const scale = THREE.MathUtils.lerp(0.5, 3, eased);
+      const scale = THREE.MathUtils.lerp(0.8, 6, eased);
       groupRef.current.scale.setScalar(scale);
       
-    } else if (t < 1.3) {
-      // Phase 2: Brief pause at center
-      groupRef.current.position.z = 5;
+    } else if (t < 1.6) {
+      // Phase 2: Brief pause at center - hold steady
+      groupRef.current.position.z = 0;
+      groupRef.current.position.y = 0;
       groupRef.current.rotation.z = 0;
+      groupRef.current.scale.setScalar(6);
       
-    } else if (t < 2) {
+    } else if (t < 2.4) {
       // Phase 3: Pitch up
-      const pitchT = (t - 1.3) / 0.7;
+      const pitchT = (t - 1.6) / 0.8;
       const easedPitch = 1 - Math.pow(1 - pitchT, 2);
       
       groupRef.current.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, easedPitch);
-      groupRef.current.position.y = THREE.MathUtils.lerp(0, 5, easedPitch);
-      groupRef.current.position.z = THREE.MathUtils.lerp(5, 10, easedPitch);
+      groupRef.current.position.y = THREE.MathUtils.lerp(0, 3, easedPitch);
+      groupRef.current.position.z = THREE.MathUtils.lerp(0, 5, easedPitch);
+      groupRef.current.scale.setScalar(6);
       
-    } else if (t < 3) {
+    } else if (t < 3.5) {
       // Phase 4: Vertical takeoff
-      const takeoffT = (t - 2) / 1;
-      const accelerated = Math.pow(takeoffT, 2);
+      const takeoffT = (t - 2.4) / 1.1;
+      const accelerated = Math.pow(takeoffT, 2.5);
       
       groupRef.current.rotation.x = -Math.PI / 2;
-      groupRef.current.position.y = 5 + accelerated * 80;
-      groupRef.current.position.z = 10;
+      groupRef.current.position.y = 3 + accelerated * 100;
+      groupRef.current.position.z = 5;
       
-      // Shrink as it goes up
-      const scale = THREE.MathUtils.lerp(3, 1, takeoffT);
+      // Scale down as it goes up
+      const scale = THREE.MathUtils.lerp(6, 2, takeoffT);
       groupRef.current.scale.setScalar(scale);
       
     } else {
@@ -72,7 +75,7 @@ const PlaneModel = ({ onAnimationComplete }: PlaneModelProps) => {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -100]} scale={0.5}>
+    <group ref={groupRef} position={[0, -2, -80]} scale={0.8}>
       <primitive object={scene} />
     </group>
   );
@@ -150,14 +153,14 @@ export const PlaneAnimation = ({ onComplete }: PlaneAnimationProps) => {
 
       {/* 3D Scene */}
       <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 3, 25]} fov={50} />
+        <PerspectiveCamera makeDefault position={[0, 2, 18]} fov={60} />
         <color attach="background" args={['#050510']} />
-        <fog attach="fog" args={['#050510', 50, 200]} />
+        <fog attach="fog" args={['#050510', 40, 150]} />
         
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 20, 15]} intensity={1.5} color="#ffffff" />
-        <directionalLight position={[-5, 5, -10]} intensity={0.5} color="#00ff88" />
-        <pointLight position={[0, 0, 10]} intensity={1} color="#00ff00" distance={30} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 20, 15]} intensity={2} color="#ffffff" />
+        <directionalLight position={[-5, 10, -10]} intensity={0.8} color="#00ff88" />
+        <pointLight position={[0, 5, 15]} intensity={1.5} color="#00ff00" distance={40} />
         
         <Suspense fallback={<LoadingFallback />}>
           <PlaneModel onAnimationComplete={handleAnimationComplete} />

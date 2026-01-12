@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useRef, useState, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, PerspectiveCamera } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
@@ -10,131 +10,114 @@ interface PlaneModelProps {
 
 const PlaneModel = ({ onAnimationComplete }: PlaneModelProps) => {
   const { scene } = useGLTF('/models/su-57.glb');
-  const modelRef = useRef<THREE.Group>(null);
-  const [animationPhase, setAnimationPhase] = useState<'approach' | 'center' | 'pitchUp' | 'takeoff' | 'done'>('approach');
-  const startTime = useRef(Date.now());
+  const groupRef = useRef<THREE.Group>(null);
+  const progressRef = useRef(0);
   const hasCompleted = useRef(false);
 
-  // Clone the scene to avoid issues
-  const clonedScene = scene.clone();
+  useFrame((_, delta) => {
+    if (!groupRef.current || hasCompleted.current) return;
 
-  useFrame(() => {
-    if (!modelRef.current || hasCompleted.current) return;
+    // Smooth progress increment
+    progressRef.current += delta * 0.35;
+    const t = progressRef.current;
 
-    const elapsed = (Date.now() - startTime.current) / 1000;
-
-    switch (animationPhase) {
-      case 'approach':
-        // Plane flies toward camera from distance
-        modelRef.current.position.z = THREE.MathUtils.lerp(-80, 0, Math.min(elapsed / 1.5, 1));
-        modelRef.current.position.y = THREE.MathUtils.lerp(0, 0, elapsed / 1.5);
-        modelRef.current.scale.setScalar(THREE.MathUtils.lerp(0.1, 1.5, Math.min(elapsed / 1.5, 1)));
-        
-        // Subtle wobble during approach
-        modelRef.current.rotation.z = Math.sin(elapsed * 3) * 0.05;
-        modelRef.current.rotation.x = Math.PI / 2; // Keep plane horizontal
-        
-        if (elapsed > 1.5) {
-          setAnimationPhase('center');
-          startTime.current = Date.now();
-        }
-        break;
-
-      case 'center':
-        // Hold at center briefly
-        modelRef.current.position.z = 0;
-        modelRef.current.rotation.z = 0;
-        
-        if (elapsed > 0.3) {
-          setAnimationPhase('pitchUp');
-          startTime.current = Date.now();
-        }
-        break;
-
-      case 'pitchUp':
-        // Pitch up to vertical
-        const pitchProgress = Math.min(elapsed / 0.6, 1);
-        const eased = 1 - Math.pow(1 - pitchProgress, 3); // Ease out cubic
-        modelRef.current.rotation.x = THREE.MathUtils.lerp(Math.PI / 2, 0, eased);
-        
-        if (elapsed > 0.6) {
-          setAnimationPhase('takeoff');
-          startTime.current = Date.now();
-        }
-        break;
-
-      case 'takeoff':
-        // Vertical takeoff - accelerate upward
-        const takeoffProgress = elapsed / 0.8;
-        const acceleration = Math.pow(takeoffProgress, 2); // Accelerating
-        modelRef.current.position.y = acceleration * 60;
-        modelRef.current.scale.setScalar(1.5 - takeoffProgress * 0.5);
-        
-        if (elapsed > 0.8) {
-          setAnimationPhase('done');
-          if (!hasCompleted.current) {
-            hasCompleted.current = true;
-            setTimeout(onAnimationComplete, 300);
-          }
-        }
-        break;
+    if (t < 1) {
+      // Phase 1: Approach - fly toward camera (0 to 1)
+      const approachT = Math.min(t, 1);
+      const eased = 1 - Math.pow(1 - approachT, 3);
+      
+      groupRef.current.position.z = THREE.MathUtils.lerp(-100, 5, eased);
+      groupRef.current.position.y = 0;
+      groupRef.current.rotation.x = 0;
+      groupRef.current.rotation.y = Math.PI; // Face camera
+      groupRef.current.rotation.z = Math.sin(t * 8) * 0.03; // Subtle wobble
+      
+      const scale = THREE.MathUtils.lerp(0.5, 3, eased);
+      groupRef.current.scale.setScalar(scale);
+      
+    } else if (t < 1.3) {
+      // Phase 2: Brief pause at center
+      groupRef.current.position.z = 5;
+      groupRef.current.rotation.z = 0;
+      
+    } else if (t < 2) {
+      // Phase 3: Pitch up
+      const pitchT = (t - 1.3) / 0.7;
+      const easedPitch = 1 - Math.pow(1 - pitchT, 2);
+      
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, easedPitch);
+      groupRef.current.position.y = THREE.MathUtils.lerp(0, 5, easedPitch);
+      groupRef.current.position.z = THREE.MathUtils.lerp(5, 10, easedPitch);
+      
+    } else if (t < 3) {
+      // Phase 4: Vertical takeoff
+      const takeoffT = (t - 2) / 1;
+      const accelerated = Math.pow(takeoffT, 2);
+      
+      groupRef.current.rotation.x = -Math.PI / 2;
+      groupRef.current.position.y = 5 + accelerated * 80;
+      groupRef.current.position.z = 10;
+      
+      // Shrink as it goes up
+      const scale = THREE.MathUtils.lerp(3, 1, takeoffT);
+      groupRef.current.scale.setScalar(scale);
+      
+    } else {
+      // Complete
+      if (!hasCompleted.current) {
+        hasCompleted.current = true;
+        onAnimationComplete();
+      }
     }
   });
 
   return (
-    <group ref={modelRef} position={[0, 0, -80]} scale={0.1}>
-      <primitive object={clonedScene} rotation={[Math.PI / 2, 0, 0]} />
+    <group ref={groupRef} position={[0, 0, -100]} scale={0.5}>
+      <primitive object={scene} />
     </group>
   );
 };
 
-// Engine glow particles
-const EngineGlow = () => {
-  const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 50;
+// Simple loading fallback
+const LoadingFallback = () => (
+  <mesh>
+    <boxGeometry args={[2, 0.5, 4]} />
+    <meshStandardMaterial color="#00ff00" wireframe />
+  </mesh>
+);
+
+// Grid floor for depth perception
+const GridFloor = () => (
+  <gridHelper
+    args={[300, 60, '#004400', '#002200']}
+    position={[0, -15, 0]}
+  />
+);
+
+// Starfield background
+const Starfield = () => {
+  const starsRef = useRef<THREE.Points>(null);
+  const count = 500;
   
-  const positions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 2;
-    positions[i * 3 + 1] = -5 + Math.random() * -10;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+  const positions = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 200;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 100 + 20;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 200 - 50;
   }
 
-  useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-    }
-  });
-
   return (
-    <points ref={particlesRef}>
+    <points ref={starsRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={particleCount}
+          count={count}
           array={positions}
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial
-        size={0.3}
-        color="#00ff88"
-        transparent
-        opacity={0.6}
-        sizeAttenuation
-      />
+      <pointsMaterial size={0.5} color="#88ff88" transparent opacity={0.6} />
     </points>
-  );
-};
-
-// Grid floor for depth
-const GridFloor = () => {
-  return (
-    <gridHelper
-      args={[200, 50, '#00ff00', '#003300']}
-      position={[0, -20, 0]}
-      rotation={[0, 0, 0]}
-    />
   );
 };
 
@@ -143,55 +126,59 @@ interface PlaneAnimationProps {
 }
 
 export const PlaneAnimation = ({ onComplete }: PlaneAnimationProps) => {
-  const [showCanvas, setShowCanvas] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
 
   const handleAnimationComplete = () => {
-    setShowCanvas(false);
-    setTimeout(onComplete, 500);
+    setIsExiting(true);
+    setTimeout(onComplete, 600);
   };
 
   return (
     <motion.div 
-      className="fixed inset-0 bg-[#0a0a12] z-50 overflow-hidden"
+      className="fixed inset-0 bg-[#050510] z-50 overflow-hidden"
       initial={{ opacity: 1 }}
-      animate={{ opacity: showCanvas ? 1 : 0 }}
+      animate={{ opacity: isExiting ? 0 : 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* CRT scanlines overlay */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,0,0.03)_2px,rgba(0,255,0,0.03)_4px)] opacity-30" />
+      {/* CRT scanlines */}
+      <div className="absolute inset-0 pointer-events-none z-10 opacity-20">
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,0,0.05)_2px,rgba(0,255,0,0.05)_4px)]" />
       </div>
 
-      {/* Vignette effect */}
-      <div className="absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.7)_100%)]" />
+      {/* Vignette */}
+      <div className="absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.8)_100%)]" />
 
-      {/* 3D Canvas */}
-      <Canvas className="w-full h-full">
-        <PerspectiveCamera makeDefault position={[0, 5, 20]} fov={60} />
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[10, 20, 10]} intensity={1} color="#ffffff" />
-        <directionalLight position={[-10, -10, -10]} intensity={0.5} color="#00ff88" />
-        <pointLight position={[0, 0, 0]} intensity={2} color="#00ff00" distance={50} />
+      {/* 3D Scene */}
+      <Canvas>
+        <PerspectiveCamera makeDefault position={[0, 3, 25]} fov={50} />
+        <color attach="background" args={['#050510']} />
+        <fog attach="fog" args={['#050510', 50, 200]} />
         
-        <PlaneModel onAnimationComplete={handleAnimationComplete} />
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[10, 20, 15]} intensity={1.5} color="#ffffff" />
+        <directionalLight position={[-5, 5, -10]} intensity={0.5} color="#00ff88" />
+        <pointLight position={[0, 0, 10]} intensity={1} color="#00ff00" distance={30} />
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <PlaneModel onAnimationComplete={handleAnimationComplete} />
+        </Suspense>
+        
         <GridFloor />
-        
-        {/* Fog for atmosphere */}
-        <fog attach="fog" args={['#0a0a12', 30, 150]} />
+        <Starfield />
       </Canvas>
 
       {/* Status text */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-terminal-green text-sm z-20"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-terminal-green text-sm z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.3 }}
       >
-        <span className="animate-pulse">▶</span> LAUNCHING INTERFACE...
+        <span className="animate-pulse">▶</span> INITIALIZING INTERFACE...
       </motion.div>
     </motion.div>
   );
 };
 
-// Preload the model
+// Preload model
 useGLTF.preload('/models/su-57.glb');

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PlaneAnimation } from './PlaneAnimation';
 
 interface BootSequenceProps {
   onComplete: () => void;
@@ -42,7 +41,7 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
   const [progress, setProgress] = useState(0);
   const [showSkip, setShowSkip] = useState(false);
-  const [phase, setPhase] = useState<'boot' | 'chaos' | 'settling' | 'plane'>('boot');
+  const [phase, setPhase] = useState<'boot' | 'chaos' | 'settling'>('boot');
   const [visibleErrors, setVisibleErrors] = useState<number[]>([]);
 
   const startChaos = useCallback(() => {
@@ -58,12 +57,11 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
     // Start settling after chaos
     setTimeout(() => {
       setPhase('settling');
-      // After settling, transition to plane animation
       setTimeout(() => {
-        setPhase('plane');
-      }, 1200);
+        onComplete();
+      }, 800);
     }, 1500);
-  }, []);
+  }, [onComplete]);
 
   useEffect(() => {
     setShowSkip(true);
@@ -100,11 +98,6 @@ export const BootSequence = ({ onComplete }: BootSequenceProps) => {
       default: return 'text-terminal-green';
     }
   };
-
-  // Show plane animation phase
-  if (phase === 'plane') {
-    return <PlaneAnimation onComplete={onComplete} />;
-  }
 
   return (
     <motion.div 

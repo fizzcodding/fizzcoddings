@@ -4,7 +4,7 @@ import { useRetroSound } from '@/hooks/useRetroSound';
 
 const socials = [
   { icon: Github, href: 'https://github.com/fizz7-ui', label: 'GitHub', username: '@fizz7-ui' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/faiyaz', label: 'LinkedIn', username: '/faiyaz' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/faiyaz-bin-iqbal-b494162bb', label: 'LinkedIn', username: '/faiyaz' },
   { icon: Code2, href: 'https://leetcode.com/u/ice__fizz', label: 'LeetCode', username: '@ice__fizz' },
   { icon: Globe, href: 'https://fizzfolios.vercel.app', label: 'Portfolio', username: 'fizzfolios.vercel.app' },
 ];

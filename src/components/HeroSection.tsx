@@ -110,7 +110,7 @@ export const HeroSection = () => {
     { icon: MessageSquare, href: 'https://wa.me/8801993227968', label: 'WHATSAPP' },
     { icon: Twitter, href: 'https://twitter.com/fizz_codding', label: 'X' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/faiyaz-bin-iqbal-b494162bb/', label: 'LINKEDIN' },
-    { icon: Mail, href: 'mailto:frozeplaysminecraft@gmail.com', label: 'EMAIL' },
+    { icon: Mail, href: 'mailto:faiyaz.is.a.dev@gmail.com', label: 'EMAIL' },
   ];
 
   const skills = [
@@ -300,7 +300,7 @@ export const HeroSection = () => {
                     <span className="font-mono text-xs text-terminal-green">AVAILABLE</span>
                   </div>
                   <a
-                    href="mailto:frozeplaysminecraft@gmail.com"
+                    href="mailto:faiyaz.is.a.dev@gmail.com"
                     onClick={playClick}
                     onMouseEnter={playHover}
                     className="font-mono text-xs text-foreground hover:text-primary transition-colors chromatic-hover"

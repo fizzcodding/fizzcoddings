@@ -1,4 +1,4 @@
- 
+
 import { useRetroSound } from '@/hooks/useRetroSound';
 import { NameBadge } from './NameBadge';
 
@@ -131,7 +131,7 @@ export const Navigation = () => {
 
   const handleHireMe = () => {
     playClick();
-    window.location.href = 'mailto:frozeplaysminecraft@gmail.com';
+    window.location.href = 'mailto:faiyaz.is.a.dev@gmail.com';
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -147,9 +147,8 @@ export const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-lg border-b border-border' : ''
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-lg border-b border-border' : ''
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-16  ">
@@ -171,7 +170,7 @@ export const Navigation = () => {
 
             {/* Hire Me Button */}
             <a
-              href="mailto:frozeplaysminecraft@gmail.com"
+              href="mailto:faiyaz.is.a.dev@gmail.com"
               className="hidden md:block px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-all"
             >
               Hire Me
@@ -207,7 +206,7 @@ export const Navigation = () => {
                 </a>
               ))}
               <a
-                href="mailto:frozeplaysminecraft@gmail.com"
+                href="mailto:faiyaz.is.a.dev@gmail.com"
                 className="mx-4 mt-2 px-4 py-3 bg-primary text-primary-foreground text-center font-medium rounded-lg"
               >
                 Hire Me

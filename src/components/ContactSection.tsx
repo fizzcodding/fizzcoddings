@@ -11,7 +11,7 @@ const socials = [
 
 export const ContactSection = () => {
   const { playClick, playHover } = useRetroSound();
-  
+
   return (
     <section className="py-20 px-4" id="contact">
       <div className="max-w-4xl mx-auto">
@@ -37,8 +37,8 @@ export const ContactSection = () => {
           >
             <h3 className="font-semibold text-foreground mb-6">Contact Info</h3>
             <div className="space-y-4">
-              <a 
-                href="mailto:frozeplaysminecraft@gmail.com"
+              <a
+                href="mailto:faiyaz.is.a.dev@gmail.com"
                 onClick={playClick}
                 onMouseEnter={playHover}
                 className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group chromatic-hover"
@@ -48,12 +48,12 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-foreground">Email</p>
-                  <p className="text-sm">frozeplaysminecraft@gmail.com</p>
+                  <p className="text-sm">faiyaz.is.a.dev@gmail.com</p>
                 </div>
               </a>
-              
-              <a 
-                href="tel:+8801715088959"
+
+              <a
+                href="tel:+8801993227968"
                 onClick={playClick}
                 onMouseEnter={playHover}
                 className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group chromatic-hover"
@@ -63,7 +63,7 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-foreground">Phone</p>
-                  <p className="text-sm">+880 1715088959</p>
+                  <p className="text-sm">+880 1993227968</p>
                 </div>
               </a>
 
@@ -89,7 +89,7 @@ export const ContactSection = () => {
             <h3 className="font-semibold text-foreground mb-6">Find Me Online</h3>
             <div className="grid grid-cols-2 gap-4">
               {socials.map((social) => (
-                  <a
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
